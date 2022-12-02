@@ -2,10 +2,24 @@ body {
   font-family: Urbanist, Arial, Sans-serif;
 }
 
+.cta-button {
+  font-family: Urbanist, Arial, Sans-serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #FFFFFF;
+  padding: 0.55rem 2.18rem;
+  background-color: #F46F0E;
+  border-radius: 2rem;
+  border-style: none;
+  display: inline-block;
+  margin-bottom: 1.875rem;
+  cursor: pointer;
+}
+
 .header {
   display: flex;
   justify-content: space-between;
-  margin: 0 2%;
+  margin: 0 calc(2% + 15px);
   font-size: 1.1rem;
 }
 .header .menu-md {
@@ -19,7 +33,7 @@ body {
 .header .menu-md__icon {
   width: 33px;
   height: 70px;
-  position: fixed;
+  position: absolute;
   z-index: 100;
   top: 0px;
   left: 20px;
@@ -59,7 +73,7 @@ body {
   width: calc(100vw - 33px);
   left: calc(33px - 100vw);
   height: 100vh;
-  position: fixed;
+  position: absolute;
   z-index: 10;
   top: 0px;
   transition: all 0.6s ease-in-out;
@@ -89,6 +103,7 @@ body {
 .header__logo {
   margin-right: 0%;
   padding: 15px;
+  padding-left: 0;
   text-align: center;
 }
 .header__logo img {
@@ -138,6 +153,121 @@ body {
   .header .bi-bag-plus {
     font-size: 1.5rem;
   }
+}
+
+.hero {
+  display: flex;
+  background: url("../../images/hero.png") no-repeat center;
+  background-size: cover;
+}
+@media all and (min-width: 768px) {
+  .hero {
+    background: none;
+    flex-direction: row;
+    justify-content: space-between;
+    margin: 0 -8px;
+  }
+}
+.hero__text {
+  background-color: rgba(225, 225, 225, 0.9);
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  z-index: 2;
+  width: 80%;
+  margin: 3.125rem auto;
+  text-align: center;
+}
+@media all and (min-width: 768px) {
+  .hero__text {
+    padding-top: 8.75rem;
+    margin: 0 0 0 calc(2% + 15px);
+    width: 50%;
+    max-width: 33rem;
+    background-color: unset;
+    text-align: unset;
+    border-radius: 0;
+  }
+}
+.hero__text h1 {
+  color: #0C5259;
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 2rem;
+  margin-bottom: 1.875rem;
+}
+@media all and (min-width: 768px) {
+  .hero__text h1 {
+    font-size: 2.375rem;
+    line-height: 3.2rem;
+    text-align: left;
+  }
+}
+.hero__text .subtitle {
+  color: #0C5259;
+  font-size: 1rem;
+  font-weight: 800;
+  line-height: 1.625rem;
+  margin-bottom: 1.875rem;
+}
+@media all and (min-width: 768px) {
+  .hero__text .subtitle {
+    text-align: left;
+  }
+}
+.hero__text .steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+@media all and (min-width: 768px) {
+  .hero__text .steps {
+    justify-content: unset;
+  }
+}
+.hero__text .steps div {
+  text-align: center;
+  margin: 1rem 0;
+}
+.hero__text .steps div:not(:last-child) {
+  margin-right: 1.25rem;
+}
+@media all and (min-width: 768px) {
+  .hero__text .steps div:not(:last-child) {
+    margin-right: 1.875rem;
+  }
+}
+.hero__text .steps div span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #0C5259;
+}
+@media all and (min-width: 768px) {
+  .hero__text .steps div span {
+    font-size: 2.5rem;
+  }
+}
+.hero__text .steps div p {
+  font-size: 0.875rem;
+  font-weight: 400;
+  color: #0C5259;
+  margin: 0.25rem 0;
+}
+@media all and (min-width: 768px) {
+  .hero__text .steps div p {
+    font-size: 1.125rem;
+  }
+}
+.hero__image {
+  display: none;
+}
+@media all and (min-width: 768px) {
+  .hero__image {
+    display: block;
+    max-width: 50%;
+  }
+}
+.hero__image img {
+  width: 100%;
 }
 
 /*# sourceMappingURL=style.css.map */

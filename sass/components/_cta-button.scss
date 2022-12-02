@@ -1,0 +1,13 @@
+.cta-button {
+    font-family: $primary-font-family;
+    font-size: 1rem;
+    font-weight: 400;
+    color: $white-color;
+    padding: 0.55rem 2.18rem;
+    background-color: $button-color;
+    border-radius: 2rem;
+    border-style: none;
+    display: inline-block;
+    margin-bottom: $text-hero-margin;
+    cursor: pointer;
+}

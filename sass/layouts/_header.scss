@@ -1,8 +1,10 @@
 .header {
     display: flex;
     justify-content: space-between;
-    margin: 0 2%;
+    margin: 0 $margin-left-right;
     font-size: $nav-font-size;
+    //position: absolute;
+    
     .menu-md {
         display: block;
         @include tablet {
@@ -11,7 +13,7 @@
         &__icon {
             width: $menu-tab-width;
             height: 70px;
-            position: fixed;
+            position: absolute;
             z-index: 100;
             top: 0px;
             left: 20px;
@@ -51,7 +53,7 @@
             width: calc(100vw - $menu-tab-width);
             left: calc($menu-tab-width - 100vw);
             height: 100vh;
-            position: fixed;
+            position: absolute;
             z-index: 10;
             top: 0px;
             transition: all .6s ease-in-out;
@@ -84,6 +86,7 @@
     &__logo {
         margin-right: 0%;
         padding: 15px;
+        padding-left: 0;
         text-align: center;
         img {
             height: 33px;
