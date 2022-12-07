@@ -217,11 +217,10 @@ body {
 .hero__text .steps {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
 }
-@media all and (min-width: 768px) {
+@media all and (max-width: 767.98px) {
   .hero__text .steps {
-    justify-content: unset;
+    justify-content: center;
   }
 }
 .hero__text .steps div {

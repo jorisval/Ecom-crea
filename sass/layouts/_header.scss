@@ -2,12 +2,10 @@
     display: flex;
     justify-content: space-between;
     margin: 0 $margin-left-right;
-    font-size: $nav-font-size;
-    //position: absolute;
-    
+    font-size: $nav-font-size;    
     .menu-md {
         display: block;
-        @include tablet {
+        @include breakpoints-up(medium) {
             display: none;
         }
         &__icon {
@@ -91,13 +89,13 @@
         img {
             height: 33px;
         }
-        @include tablet {
+        @include breakpoints-up(medium) {
             margin-right: 15%;
         }
     }
     .nav-lg {
         display: none;
-        @include tablet {
+        @include breakpoints-up(medium) {
             display: block;
         }
         width: 40%;
@@ -128,7 +126,7 @@
     .bi-bag-plus {
         font-size: 150%;
         color: $nav-color;
-        @include tablet {
+        @include breakpoints-up(medium) {
             font-size: 1.5rem;
         }
     }

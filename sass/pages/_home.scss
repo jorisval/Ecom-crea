@@ -2,7 +2,7 @@
     display: flex;
     background: url("../../images/hero.png") no-repeat center;
     background-size: cover;
-    @include tablet {
+    @include breakpoints-up(medium) {
         background: none;
         flex-direction: row;
         justify-content: space-between;
@@ -16,7 +16,7 @@
         width: 80%;
         margin: 3.125rem auto;
         text-align: center;
-        @include tablet {
+        @include breakpoints-up(medium) {
             padding-top: 8.75rem;
             margin: 0 0 0 $margin-left-right;
             width: 50%;
@@ -31,7 +31,7 @@
             font-weight: 800;
             line-height: 2rem;
             margin-bottom: $text-hero-margin;
-            @include tablet {
+            @include breakpoints-up(medium) {
                 font-size: 2.375rem;
                 line-height: 3.2rem;
                 text-align: left;
@@ -43,23 +43,22 @@
             font-weight: 800;
             line-height: 1.625rem;
             margin-bottom: $text-hero-margin;
-            @include tablet {
+            @include breakpoints-up(medium) {
                 text-align: left;
             }
         }
         .steps {
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
-            @include tablet {
-                justify-content: unset;
+            @include breakpoints-down(small) {
+                justify-content: center;
             }
             div {
                 text-align: center;
                 margin: 1rem 0;
                 &:not(:last-child) {
                     margin-right: 1.25rem;
-                    @include tablet {
+                    @include breakpoints-up(medium) {
                         margin-right: 1.875rem;
                     }
                 }
@@ -67,7 +66,7 @@
                     font-size: 1.5rem;
                     font-weight: bold;
                     color: $title-h2-color;
-                    @include tablet {
+                    @include breakpoints-up(medium) {
                         font-size: 2.5rem;
                     }
                 }
@@ -76,7 +75,7 @@
                     font-weight: 400;
                     color: $primary-color;
                     margin: 0.25rem 0;
-                    @include tablet {
+                    @include breakpoints-up(medium) {
                         font-size: 1.125rem;
                     }
                 }
@@ -86,7 +85,7 @@
     }
     &__image {
         display: none;
-        @include tablet {
+        @include breakpoints-up(medium) {
             display: block;
             max-width: 50%;
         }
