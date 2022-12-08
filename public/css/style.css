@@ -54,6 +54,7 @@ body {
   left: calc(100vw - 33px);
   transition: all 600ms ease-in-out;
   background-color: #6D7D8B;
+  position: fixed;
 }
 .header .menu-md__icon.active #icon-bar-one {
   transform: translateY(9px) rotate(-135deg);
@@ -99,6 +100,7 @@ body {
   left: 0px;
   background-color: #6D7D8B;
   transition: all 0.6s ease-in-out;
+  position: fixed;
 }
 .header__logo {
   margin-right: 0%;
@@ -159,6 +161,7 @@ body {
   display: flex;
   background: url("../../images/hero.png") no-repeat center;
   background-size: cover;
+  margin: 0 -0.5rem;
 }
 @media all and (min-width: 768px) {
   .hero {
@@ -267,6 +270,58 @@ body {
 }
 .hero__image img {
   width: 100%;
+}
+
+.services-section {
+  margin: 0 calc(2% + 15px);
+  margin-top: 5.625rem;
+  text-align: center;
+}
+.services-section .services {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.services-section .services .service {
+  width: 14.375rem;
+  border-radius: 0.625rem;
+  text-align: center;
+  font-weight: 400;
+  font-size: 1.125rem;
+  background-color: #f3f3f3;
+  padding-bottom: 0.9375rem;
+  margin: auto;
+  margin-bottom: 2.1875rem;
+}
+@media all and (min-width: 768px) {
+  .services-section .services .service {
+    width: 20rem;
+    font-size: 1.25rem;
+    padding-bottom: 1.875rem;
+  }
+}
+.services-section .services .service img {
+  width: 100%;
+  border-radius: 0.625rem 0.625rem 0 0;
+  margin-bottom: 0.9375rem;
+}
+@media all and (min-width: 768px) {
+  .services-section .services .service img {
+    margin-bottom: 1.875rem;
+  }
+}
+.services-section .services .service p {
+  color: #0C5259;
+  margin: 0 0 0.875rem;
+}
+@media all and (min-width: 768px) {
+  .services-section .services .service p {
+    margin-bottom: 1rem;
+  }
+}
+.services-section .services .service span {
+  color: #F46F0E;
 }
 
 /*# sourceMappingURL=style.css.map */

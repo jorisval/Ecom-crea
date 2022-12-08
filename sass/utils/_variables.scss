@@ -12,7 +12,7 @@ $transparent-color: rgba(0,0,0,0);
 $transparent-background: rgba(0,0,0,0.5);
 $background-color-1: rgba(12,89,73,10);
 $background-color-2: rgba(12,82,89,10);
-
+$background-color-3: #f3f3f3;
 $primary-font-family: Urbanist, Arial, Sans-serif;
 
 $nav-font-size: 1.1rem;
@@ -25,3 +25,4 @@ $text-hero-margin: 1.875rem;
 $breakpoints-up: (medium: 768px, large: 992px, xlarge: 1200px);
 //47.998rem = 767.98px; 61.998rem = 991.98px; 74.998rem = 1199.98px
 $breakpoints-down: (small: 767.98px, medium: 991.98px, large: 1199.98px);
+$space-between-sections: 5.625rem;
