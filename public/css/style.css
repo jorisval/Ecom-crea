@@ -375,7 +375,7 @@ h2 {
 .benefice-team__text p {
   color: #6D7D8B;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.625rem;
   margin-bottom: 1.875rem;
 }
@@ -435,7 +435,7 @@ h2 {
 .benefice-mb__text p {
   color: #6D7D8B;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.625rem;
   margin-bottom: 1.875rem;
 }
@@ -495,7 +495,7 @@ h2 {
 .benefice-sav__text p {
   color: #6D7D8B;
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 600;
   line-height: 1.625rem;
   margin-bottom: 1.875rem;
 }
@@ -539,6 +539,45 @@ h2 {
 @media all and (min-width: 768px) {
   .result__elements img {
     max-width: 13rem;
+  }
+}
+
+.why {
+  margin: 0 calc(2% + 15px);
+  margin-top: 5.625rem;
+  text-align: center;
+}
+.why__elements {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.why__element {
+  width: 12.5rem;
+  padding: 1.375rem;
+  padding-top: 0;
+  text-align: center;
+  margin: auto;
+}
+@media all and (min-width: 768px) {
+  .why__element {
+    width: 20rem;
+  }
+}
+.why__element img {
+  width: 4.625rem;
+  margin-bottom: 0.625rem;
+}
+.why__element p {
+  color: #6D7D8B;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.625rem;
+  margin-bottom: 1.875rem;
+}
+@media all and (min-width: 768px) {
+  .why__element p {
+    font-size: 1.125rem;
   }
 }
 

@@ -173,7 +173,7 @@
         p {
             color: $paragraph-color;
             font-size: 1rem;
-            font-weight: 400;
+            font-weight: 600;
             line-height: 1.625rem;
             margin-bottom: $space-between-30;
             @include breakpoints-up(medium) {
@@ -222,7 +222,7 @@
         p {
             color: $paragraph-color;
             font-size: 1rem;
-            font-weight: 400;
+            font-weight: 600;
             line-height: 1.625rem;
             margin-bottom: $space-between-30;
             @include breakpoints-up(medium) {
@@ -272,7 +272,7 @@
         p {
             color: $paragraph-color;
             font-size: 1rem;
-            font-weight: 400;
+            font-weight: 600;
             line-height: 1.625rem;
             margin-bottom: $space-between-30;
             @include breakpoints-up(medium) {
@@ -309,6 +309,40 @@
             margin-bottom: 1rem;
             @include breakpoints-up(medium) {
                 max-width: 13rem;
+            }
+        }
+    }
+}
+.why {
+    margin: 0 $margin-left-right;
+    margin-top: $space-between-90;
+    text-align: center;
+    &__elements {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+    &__element {
+        width: 12.5rem;
+        padding: 1.375rem;
+        padding-top: 0;
+        text-align: center;
+        margin: auto;
+        @include breakpoints-up(medium) {
+            width: 20rem;
+        }
+        img {
+            width: 4.625rem;
+            margin-bottom: 0.625rem;
+        }
+        p {
+            color: $paragraph-color;
+            font-size: 1rem;
+            font-weight: 600;
+            line-height: 1.625rem;
+            margin-bottom: $space-between-30;
+            @include breakpoints-up(medium) {
+                font-size: 1.125rem;
             }
         }
     }
