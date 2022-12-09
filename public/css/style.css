@@ -1,5 +1,18 @@
 body {
   font-family: Urbanist, Arial, Sans-serif;
+  max-width: 112.5rem;
+}
+
+h2 {
+  color: #0C5259;
+  font-size: 1.375rem;
+  font-weight: 400;
+  margin-bottom: 1.875rem;
+}
+@media all and (min-width: 768px) {
+  h2 {
+    font-size: 2rem;
+  }
 }
 
 .cta-button {
@@ -359,17 +372,6 @@ body {
     max-width: 41.25rem;
   }
 }
-.benefice-team__text h2 {
-  color: #0C5259;
-  font-size: 1.375rem;
-  font-weight: 400;
-  margin-bottom: 1.875rem;
-}
-@media all and (min-width: 768px) {
-  .benefice-team__text h2 {
-    font-size: 2rem;
-  }
-}
 .benefice-team__text p {
   color: #6D7D8B;
   font-size: 1rem;
@@ -428,17 +430,6 @@ body {
   .benefice-mb__text {
     width: 45%;
     max-width: 41.25rem;
-  }
-}
-.benefice-mb__text h2 {
-  color: #0C5259;
-  font-size: 1.375rem;
-  font-weight: 400;
-  margin-bottom: 1.875rem;
-}
-@media all and (min-width: 768px) {
-  .benefice-mb__text h2 {
-    font-size: 2rem;
   }
 }
 .benefice-mb__text p {
@@ -501,17 +492,6 @@ body {
     max-width: 41.25rem;
   }
 }
-.benefice-sav__text h2 {
-  color: #0C5259;
-  font-size: 1.375rem;
-  font-weight: 400;
-  margin-bottom: 1.875rem;
-}
-@media all and (min-width: 768px) {
-  .benefice-sav__text h2 {
-    font-size: 2rem;
-  }
-}
 .benefice-sav__text p {
   color: #6D7D8B;
   font-size: 1rem;
@@ -534,6 +514,31 @@ body {
 @media all and (min-width: 768px) {
   .benefice-sav__text a {
     font-size: 1.125rem;
+  }
+}
+
+.result {
+  margin: 0 10%;
+  margin-top: 3.75rem;
+  text-align: center;
+}
+.result__elements {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.result__elements img {
+  max-width: 9.375rem;
+  height: fit-content;
+  border-radius: 0.625rem;
+  margin: auto;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+@media all and (min-width: 768px) {
+  .result__elements img {
+    max-width: 13rem;
   }
 }
 

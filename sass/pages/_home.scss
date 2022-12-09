@@ -96,7 +96,6 @@
     }
 
 }
-
 .services-section {
     margin: 0 $margin-left-right;
     margin-top: $space-between-90; 
@@ -171,15 +170,6 @@
             width: 45%;
             max-width: 41.25rem;
         }
-        h2 {
-            color: $title-h2-color;
-            font-size: 1.375rem;
-            font-weight: 400;
-            margin-bottom: $space-between-30;
-            @include breakpoints-up(medium) {
-                font-size: 2rem;
-            }
-        }
         p {
             color: $paragraph-color;
             font-size: 1rem;
@@ -228,15 +218,6 @@
         @include breakpoints-up(medium) {
             width: 45%;
             max-width: 41.25rem;
-        }
-        h2 {
-            color: $title-h2-color;
-            font-size: 1.375rem;
-            font-weight: 400;
-            margin-bottom: $space-between-30;
-            @include breakpoints-up(medium) {
-                font-size: 2rem;
-            }
         }
         p {
             color: $paragraph-color;
@@ -287,15 +268,7 @@
             width: 45%;
             max-width: 41.25rem;
         }
-        h2 {
-            color: $title-h2-color;
-            font-size: 1.375rem;
-            font-weight: 400;
-            margin-bottom: $space-between-30;
-            @include breakpoints-up(medium) {
-                font-size: 2rem;
-            }
-        }
+        
         p {
             color: $paragraph-color;
             font-size: 1rem;
@@ -314,6 +287,28 @@
             margin-bottom: $space-between-30;
             @include breakpoints-up(medium) {
                 font-size: 1.125rem;
+            }
+        }
+    }
+}
+.result {
+    margin: 0 10%;
+    margin-top: $space-between-60;
+    text-align: center;
+    &__elements {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        img {
+            max-width: 9.375rem;
+            height: fit-content;
+            border-radius: 0.625rem;
+            margin: auto;
+            margin-top: 0;
+            margin-bottom: 1rem;
+            @include breakpoints-up(medium) {
+                max-width: 13rem;
             }
         }
     }
