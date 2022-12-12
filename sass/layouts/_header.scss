@@ -1,8 +1,13 @@
 .header {
     display: flex;
     justify-content: space-between;
-    margin: 0 $margin-left-right;
-    font-size: $nav-font-size;    
+    padding: 0 $margin-left-right;
+    margin: -0.5rem;
+    margin-bottom: 0;
+    font-size: $nav-font-size;
+    @include breakpoints-up (medium) {
+        background-color: $background-color-1;
+    }    
     .menu-md {
         display: block;
         @include breakpoints-up(medium) {
@@ -25,7 +30,7 @@
                 transition: all .6s ease-in-out;
             }
             &:nth-child(1){
-                padding-top: 23px;
+                padding-top: 15px;
             }
             &.active{
                 left: calc(100vw - $menu-tab-width);

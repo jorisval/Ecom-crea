@@ -32,8 +32,15 @@ h2 {
 .header {
   display: flex;
   justify-content: space-between;
-  margin: 0 calc(2% + 15px);
+  padding: 0 calc(2% + 15px);
+  margin: -0.5rem;
+  margin-bottom: 0;
   font-size: 1.1rem;
+}
+@media all and (min-width: 768px) {
+  .header {
+    background-color: rgba(12, 89, 73, 0.1);
+  }
 }
 .header .menu-md {
   display: block;
@@ -61,7 +68,7 @@ h2 {
   transition: all 0.6s ease-in-out;
 }
 .header .menu-md__icon:nth-child(1) {
-  padding-top: 23px;
+  padding-top: 15px;
 }
 .header .menu-md__icon.active {
   left: calc(100vw - 33px);
@@ -170,6 +177,106 @@ h2 {
   }
 }
 
+.footer {
+  padding: 0 calc(2% + 15px);
+  padding-top: 1.875rem;
+  padding-bottom: 1.25rem;
+  margin: 0 -0.5rem;
+  margin-top: 5.625rem;
+  color: #6D7D8B;
+  border-top: 1px rgba(12, 82, 89, 0.2) solid;
+  background-image: linear-gradient(rgba(0, 0, 0, 0), rgba(12, 82, 89, 0.1));
+}
+.footer__part-1 {
+  display: flex;
+  flex-direction: column-reverse;
+  justify-content: space-between;
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 3.75rem;
+}
+@media all and (min-width: 768px) {
+  .footer__part-1 {
+    flex-direction: row;
+    flex-wrap: wrap;
+    font-size: 1.125rem;
+    margin-bottom: 5.625rem;
+  }
+}
+.footer__part-1 div {
+  padding: 1rem 1rem 1rem;
+}
+.footer__part-1 h3 {
+  font-size: 1.125rem;
+  color: #0C5259;
+  font-weight: bold;
+  margin-bottom: 0.625rem;
+}
+@media all and (min-width: 768px) {
+  .footer__part-1 h3 {
+    font-size: 1.25rem;
+  }
+}
+.footer__part-1 ul {
+  padding-left: 0;
+}
+.footer__part-1 li {
+  list-style-type: none;
+  margin: 0.25rem 0;
+}
+.footer__part-1 a {
+  text-decoration: none;
+  color: #6D7D8B;
+}
+.footer__part-1 a:hover {
+  color: #F46F0E;
+}
+.footer__part-1 form {
+  display: flex;
+  width: 100%;
+}
+.footer__part-1 input[type=email] {
+  font-size: 0.875rem;
+  color: #6D7D8B;
+  padding: 0.25rem 0.5rem;
+  border: 2px #F46F0E solid;
+  border-radius: 2rem 0 0 2rem;
+  width: 65%;
+}
+@media all and (min-width: 768px) {
+  .footer__part-1 input[type=email] {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+}
+.footer__part-1 input[type=submit] {
+  font-size: 0.875rem;
+  color: #FFFFFF;
+  background-color: #F46F0E;
+  padding: 0.25rem 0.5rem;
+  border: 2px #F46F0E solid;
+  border-radius: 0 2rem 2rem 0;
+  margin-left: -5px;
+}
+@media all and (min-width: 768px) {
+  .footer__part-1 input[type=submit] {
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+  }
+}
+.footer__part-2 {
+  font-size: 1rem;
+  font-weight: 500;
+}
+@media all and (min-width: 768px) {
+  .footer__part-2 {
+    font-size: 1.125rem;
+  }
+}
+.footer__part-2 p {
+  margin: 0;
+}
+
 .hero {
   display: flex;
   background: url("../../images/hero.png") no-repeat center;
@@ -178,7 +285,8 @@ h2 {
 }
 @media all and (min-width: 768px) {
   .hero {
-    background: none;
+    background: unset;
+    background-image: linear-gradient(rgba(12, 89, 73, 0.1), rgba(0, 0, 0, 0));
     flex-direction: row;
     justify-content: space-between;
     margin: 0 -8px;

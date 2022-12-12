@@ -4,7 +4,8 @@
     background-size: cover;
     margin: 0 -0.5rem;
     @include breakpoints-up(medium) {
-        background: none;
+        background: unset;
+        background-image: linear-gradient($background-color-1, $transparent-color);
         flex-direction: row;
         justify-content: space-between;
         margin: 0 -8px;
