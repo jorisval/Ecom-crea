@@ -7,7 +7,7 @@ h2 {
   color: #0C5259;
   font-size: 1.375rem;
   font-weight: 400;
-  margin-bottom: 1.875rem;
+  margin-bottom: 1.25rem;
 }
 @media all and (min-width: 768px) {
   h2 {
@@ -37,11 +37,6 @@ h2 {
   margin-bottom: 0;
   font-size: 1.1rem;
 }
-@media all and (min-width: 768px) {
-  .header {
-    background-color: rgba(12, 89, 73, 0.1);
-  }
-}
 .header .menu-md {
   display: block;
 }
@@ -51,33 +46,31 @@ h2 {
   }
 }
 .header .menu-md__icon {
-  width: 33px;
-  height: 70px;
+  width: 30px;
+  height: 40px;
   position: absolute;
   z-index: 100;
   top: 0px;
   left: 20px;
+  padding-top: 15px;
   cursor: pointer;
   transition: all 0.6s ease-in-out;
 }
 .header .menu-md__icon div {
-  height: 4px;
+  height: 2.5px;
   background-color: #0C5259;
   display: block;
   margin: 5px;
   transition: all 0.6s ease-in-out;
 }
-.header .menu-md__icon:nth-child(1) {
-  padding-top: 15px;
-}
 .header .menu-md__icon.active {
-  left: calc(100vw - 33px);
+  left: calc(100vw - 30px);
   transition: all 600ms ease-in-out;
   background-color: #6D7D8B;
   position: fixed;
 }
 .header .menu-md__icon.active #icon-bar-one {
-  transform: translateY(9px) rotate(-135deg);
+  transform: translateY(7.5px) rotate(-135deg);
   transition: all 0.6s ease-in-out;
   background-color: #F46F0E;
 }
@@ -86,13 +79,13 @@ h2 {
   transition: 0.4s ease;
 }
 .header .menu-md__icon.active #icon-bar-three {
-  transform: translateY(-9px) rotate(-45deg);
+  transform: translateY(-8px) rotate(-45deg);
   transition: all 0.6s ease-in-out;
   background-color: #F46F0E;
 }
 .header .menu-md__hide {
-  width: calc(100vw - 33px);
-  left: calc(33px - 100vw);
+  width: calc(100vw - 30px);
+  left: calc(30px - 100vw);
   height: 100vh;
   position: absolute;
   z-index: 10;
@@ -129,7 +122,12 @@ h2 {
   text-align: center;
 }
 .header__logo img {
-  height: 33px;
+  height: 1.625rem;
+}
+@media all and (min-width: 768px) {
+  .header__logo img {
+    height: 2rem;
+  }
 }
 @media all and (min-width: 768px) {
   .header__logo {
@@ -168,7 +166,7 @@ h2 {
   padding: 15px 0;
 }
 .header .bi-bag-plus {
-  font-size: 150%;
+  font-size: 1.25rem;
   color: #0C5259;
 }
 @media all and (min-width: 768px) {
@@ -275,6 +273,12 @@ h2 {
 }
 .footer__part-2 p {
   margin: 0;
+}
+
+@media all and (min-width: 768px) {
+  .header {
+    background-color: rgba(12, 89, 73, 0.1);
+  }
 }
 
 .hero {
@@ -460,7 +464,7 @@ h2 {
 }
 .benefice-team__image {
   width: 100%;
-  margin-bottom: 1.875rem;
+  margin-bottom: 1.25rem;
 }
 @media all and (min-width: 768px) {
   .benefice-team__image {
@@ -483,9 +487,9 @@ h2 {
 .benefice-team__text p {
   color: #6D7D8B;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.625rem;
-  margin-bottom: 1.875rem;
+  margin-bottom: 1.25rem;
 }
 @media all and (min-width: 768px) {
   .benefice-team__text p {
@@ -496,8 +500,8 @@ h2 {
   text-decoration: none;
   color: #F46F0E;
   font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 1.875rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
 }
 @media all and (min-width: 768px) {
   .benefice-team__text a {
@@ -520,7 +524,7 @@ h2 {
 }
 .benefice-mb__image {
   width: 100%;
-  margin-bottom: 1.875rem;
+  margin-bottom: 1.25rem;
 }
 @media all and (min-width: 768px) {
   .benefice-mb__image {
@@ -543,9 +547,9 @@ h2 {
 .benefice-mb__text p {
   color: #6D7D8B;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.625rem;
-  margin-bottom: 1.875rem;
+  margin-bottom: 1.25rem;
 }
 @media all and (min-width: 768px) {
   .benefice-mb__text p {
@@ -556,8 +560,8 @@ h2 {
   text-decoration: none;
   color: #F46F0E;
   font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 1.875rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
 }
 @media all and (min-width: 768px) {
   .benefice-mb__text a {
@@ -580,7 +584,7 @@ h2 {
 }
 .benefice-sav__image {
   width: 100%;
-  margin-bottom: 1.875rem;
+  margin-bottom: 1.25rem;
 }
 @media all and (min-width: 768px) {
   .benefice-sav__image {
@@ -603,9 +607,9 @@ h2 {
 .benefice-sav__text p {
   color: #6D7D8B;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.625rem;
-  margin-bottom: 1.875rem;
+  margin-bottom: 1.25rem;
 }
 @media all and (min-width: 768px) {
   .benefice-sav__text p {
@@ -616,8 +620,8 @@ h2 {
   text-decoration: none;
   color: #F46F0E;
   font-size: 1rem;
-  font-weight: bold;
-  margin-bottom: 1.875rem;
+  font-weight: 500;
+  margin-bottom: 1.25rem;
 }
 @media all and (min-width: 768px) {
   .benefice-sav__text a {
@@ -679,7 +683,7 @@ h2 {
 .why__element p {
   color: #6D7D8B;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 500;
   line-height: 1.625rem;
   margin-bottom: 1.875rem;
 }

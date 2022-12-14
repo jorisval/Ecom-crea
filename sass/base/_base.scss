@@ -6,7 +6,7 @@ h2 {
     color: $title-h2-color;
     font-size: 1.375rem;
     font-weight: 400;
-    margin-bottom: $space-between-30;
+    margin-bottom: $space-between-20;
     @include breakpoints-up(medium) {
         font-size: 2rem;
     } 

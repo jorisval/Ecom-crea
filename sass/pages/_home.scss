@@ -1,3 +1,8 @@
+.header {
+    @include breakpoints-up (medium) {
+        background-color: $background-color-1;
+    } 
+}
 .hero {
     display: flex;
     background: url("../../images/hero.png") no-repeat center;
@@ -156,7 +161,7 @@
     }
     &__image {
         width: 100%;
-        margin-bottom: 1.875rem;
+        margin-bottom: $space-between-20;
         @include breakpoints-up(medium) {
             width: 50%;
             max-width: 43.75rem;
@@ -174,9 +179,9 @@
         p {
             color: $paragraph-color;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.625rem;
-            margin-bottom: $space-between-30;
+            margin-bottom: $space-between-20;
             @include breakpoints-up(medium) {
                 font-size: 1.125rem;
             }
@@ -185,8 +190,8 @@
             text-decoration: none;
             color: $secondary-color;
             font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: $space-between-30;
+            font-weight: 500;
+            margin-bottom: $space-between-20;
             @include breakpoints-up(medium) {
                 font-size: 1.125rem;
             }
@@ -205,7 +210,7 @@
     }
     &__image {
         width: 100%;
-        margin-bottom: 1.875rem;
+        margin-bottom: $space-between-20;
         @include breakpoints-up(medium) {
             width: 50%;
             max-width: 43.75rem;
@@ -223,9 +228,9 @@
         p {
             color: $paragraph-color;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.625rem;
-            margin-bottom: $space-between-30;
+            margin-bottom: $space-between-20;
             @include breakpoints-up(medium) {
                 font-size: 1.125rem;
             }
@@ -234,8 +239,8 @@
             text-decoration: none;
             color: $secondary-color;
             font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: $space-between-30;
+            font-weight: 500;
+            margin-bottom: $space-between-20;
             @include breakpoints-up(medium) {
                 font-size: 1.125rem;
             }
@@ -254,7 +259,7 @@
     }
     &__image {
         width: 100%;
-        margin-bottom: 1.875rem;
+        margin-bottom: $space-between-20;
         @include breakpoints-up(medium) {
             width: 50%;
             max-width: 43.75rem;
@@ -273,9 +278,9 @@
         p {
             color: $paragraph-color;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.625rem;
-            margin-bottom: $space-between-30;
+            margin-bottom: $space-between-20;
             @include breakpoints-up(medium) {
                 font-size: 1.125rem;
             }
@@ -284,8 +289,8 @@
             text-decoration: none;
             color: $secondary-color;
             font-size: 1rem;
-            font-weight: bold;
-            margin-bottom: $space-between-30;
+            font-weight: 500;
+            margin-bottom: $space-between-20;
             @include breakpoints-up(medium) {
                 font-size: 1.125rem;
             }
@@ -339,7 +344,7 @@
         p {
             color: $paragraph-color;
             font-size: 1rem;
-            font-weight: 600;
+            font-weight: 500;
             line-height: 1.625rem;
             margin-bottom: $space-between-30;
             @include breakpoints-up(medium) {
