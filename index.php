@@ -17,48 +17,13 @@
 	<title>Votre équipe !</title>
 </head>
 <body>
-	<div class="header">
-		<div class="menu-md">
-			<div class="menu-md__icon">
-				<div id="icon-bar-one"></div>
-				<div id="icon-bar-two"></div>
-				<div id="icon-bar-three"></div>
-			</div>
-			<div class="menu-md__hide">
-				<nav>
-					<ul class="">
-						<li class=""><a class="" href="">Accueil</a></li>
-						<li class=""><a class="" href="">Catalogue</a></li>
-						<li class=""><a class="" href="">Portfolio</a></li>
-						<li class=""><a class="" href="">FAQ</a></li>
-						<li class=""><a class="" href="">Contact</a></li>
-						<li class=""><a class="" href="">Blog</a></li>
-					</ul>
-				</nav>
-			</div>
-		</div>
-		
-		<div class="header__logo">
-			<img src="images/logo-ecom-crea.png">
-		</div>
-		<nav class="nav-lg">
-			<ul class="">
-				<li class=""><a class="" href="">Accueil</a></li>
-				<li class=""><a class="" href="">Catalogue</a></li>
-				<li class=""><a class="" href="">Portfolio</a></li>
-				<li class=""><a class="" href="">FAQ</a></li>
-				<li class=""><a class="" href="">Contact</a></li>
-				<li class=""><a class="" href="">Blog</a></li>
-			</ul>
-		</nav>
-		<div class="header__cart">
-			<a href=""><span class="bi bi-bag-plus"></span></a>
-		</div>
-	</div>	
+	<?php
+		include('header.php');
+	?>	
 	<div class="hero">
 		<div class="hero__text">
 			<h1>L'équipe secrète derrière les e-commerçants qui se détentent et chiffrent sans stress</h1>
-			<p class="subtitle">Déléguez puis laissez l’équipe Ecom-crea s’occuper des tâches et concentrez-vous sur l’essentiel !</p>
+			<p class="subtitle">Déléguez puis laissez l'équipe Ecom-crea s'occuper des tâches et concentrez-vous sur l’essentiel !</p>
 			<button class="cta-button">Voir catalogue</button>
 			<div class="steps">
 				<div>
@@ -173,44 +138,9 @@
 			</div>
 		</div>
 	</div>
-	<div class="footer">
-		<div class="footer__part-1">
-			<div class="media">
-				<img src="images/logo-ecom-crea.png">
-				<ul>
-					<li><a href="#"><i class="bi bi-instagram"></i> Instagram</a></li>
-					<li><a href="#"><i class="bi bi-whatsapp"></i> Whatsapp</a></li>
-				</ul>
-			</div>
-			<div class="support">
-				<h3>Contact & Support</h3>
-				<ul>
-					<li><a href="#"><i class="bi"></i>+33 7 80 70 82 87</a></li>
-					<li><a href="#"><i class="bi"></i>info@ecom-crea.com</a></li>
-					<li><a href="#"><i class="bi"></i>Lun-Ven 9H00-18H00</a></li>
-				</ul>
-			</div>
-			<div class="legal">
-				<h3>Mentions légales</h3>
-				<ul>
-					<li><a href="#"><i class="bi"></i>Conditions Générales De Vente</a></li>
-					<li><a href="#"><i class="bi"></i>Politique de confidentialité</a></li>
-					<li><a href="#"><i class="bi"></i>Politique De Retour & Remboursement</a></li>
-				</ul>
-			</div>
-			<div class="newsletter">
-				<h3>Newsleter</h3>
-				<p>Inscrivez-vous à notre newsletter et recevez votre offre de bienvenue !</p>
-				<form method="post" action="">
-					<input type="email" id="email" name="email" placeholder="Email">
-					<input type="submit" value="S'inscrire">
-				</form>
-			</div>
-		</div>
-		<div class="footer__part-2">
-			<p>© 2022 Ecom-crea | Tous droits réservés.</p>
-		</div>
-	</div>
+	<?php
+		include('footer.php');
+	?>
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
 	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
 
