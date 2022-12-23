@@ -15,6 +15,17 @@ h2 {
   }
 }
 
+h3 {
+  color: #0C5259;
+  font-size: 1.375rem;
+  font-weight: 400;
+}
+@media all and (min-width: 768px) {
+  h3 {
+    font-size: 1.75rem;
+  }
+}
+
 .cta-button {
   font-family: Urbanist, Arial, Sans-serif;
   font-size: 1rem;
@@ -868,6 +879,17 @@ h2 {
     width: 70%;
     margin: auto;
   }
+}
+
+.product-catalog-view .solid {
+  width: 25%;
+  margin: auto;
+  border-top: 1px #c4c4c4 solid;
+  margin-bottom: 3.75rem;
+}
+.product-catalog-view h3 {
+  text-align: center;
+  margin-bottom: -3.75rem;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -11,3 +11,11 @@ h2 {
         font-size: 2rem;
     } 
 }
+h3 {
+    color: $title-h2-color;
+    font-size: 1.375rem;
+    font-weight: 400;
+    @include breakpoints-up(medium) {
+        font-size: 1.75rem;
+    } 
+}

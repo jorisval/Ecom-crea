@@ -129,3 +129,15 @@
         margin: auto;
     }
 }
+.product-catalog-view {
+    .solid {
+        width: 25%;
+        margin: auto;
+        border-top: 1px $color-c4 solid;
+        margin-bottom: $space-between-60;
+    }
+    h3 {
+        text-align: center;
+        margin-bottom: -$space-between-60;
+    }
+}
