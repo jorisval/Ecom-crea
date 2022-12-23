@@ -8,11 +8,14 @@ $title-h3-color: #0C5259;
 $paragraph-color: #6D7D8B;
 $button-color: #F46F0E;
 $link-color: #04E7FF;
+$color-f6: #f6f6f6;
+$color-c4: #c4c4c4;
 $transparent-color: rgba(0,0,0,0);
 $transparent-background: rgba(0,0,0,0.5);
 $background-color-1: rgba(12,89,73,0.10);
 $background-color-2: rgba(12,82,89,0.10);
 $background-color-3: #f3f3f3;
+
 $primary-font-family: Urbanist, Arial, Sans-serif;
 
 $nav-font-size: 1.1rem;
@@ -24,7 +27,7 @@ $space-between-20: 1.25rem;
 $space-between-30: 1.875rem;
 $space-between-60: 3.75rem;
 $space-between-90: 5.625rem;
-//48rem = 768px; 62rem = 992px; 75rem = 1200px
-$breakpoints-up: (medium: 768px, large: 992px, xlarge: 1200px);
-//47.998rem = 767.98px; 61.998rem = 991.98px; 74.998rem = 1199.98px
-$breakpoints-down: (small: 767.98px, medium: 991.98px, large: 1199.98px);
+//36rem = 576px; 48rem = 768px; 62rem = 992px; 75rem = 1200px
+$breakpoints-up: (small: 576px, medium: 768px, large: 992px, xlarge: 1200px);
+//35.998rem = 575.98px; 47.998rem = 767.98px; 61.998rem = 991.98px; 74.998rem = 1199.98px
+$breakpoints-down: (xsmall: 575.98px, small: 767.98px, medium: 991.98px, large: 1199.98px);

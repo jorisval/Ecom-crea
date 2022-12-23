@@ -18,8 +18,32 @@
     </head>
     <body>
         <?php include('header.php'); ?>
-        <div>
-            
+        <div class="product-hero">
+            <div class="product-hero__part-1"><img src="./images/service-video.png"></div>
+            <div class="product-hero__part-2">
+                <div class="product-title">
+                    <h2>Réalisation de vidéo publicitaire</h2>
+                    <span>45€</span>
+                </div>
+                <div class="option">
+                    <p>Option</p>
+                    <div class="option__case">
+                        <div>Pack 1</div>
+                        <div>Pack 2</div>
+                        <div>Pack 3</div>
+                        <div>Retouche illimitée</div>
+                        <div>Langue au choix</div>
+                        <div>Livraison express</div>
+                    </div>
+                </div>
+                <div class="quantity">
+                    <label  for="quantity">Quantité</label>
+                    <button class="quantity__button-down">-</button>
+                    <input type="text" id="quantity" value="1">
+                    <button class="quantity__button-up">+</button>
+                </div>
+                <button class="add-to-cart">+ Ajouter au panier</button>
+            </div>
         </div>
         <?php include('footer.php'); ?>
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->

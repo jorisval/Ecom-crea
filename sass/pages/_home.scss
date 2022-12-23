@@ -1,4 +1,4 @@
-.header {
+.header.home {
     @include breakpoints-up (medium) {
         background-color: $background-color-1;
     } 

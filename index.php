@@ -1,25 +1,60 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=divice-width, initial-scale=1.0">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=divice-width, initial-scale=1.0">
 
-	<!-- Bootstrap icons -->
-	<link href='https://fonts.googleapis.com/css?family=Urbanist' rel='stylesheet'>
+		<!-- Bootstrap icons -->
+		<link href='https://fonts.googleapis.com/css?family=Urbanist' rel='stylesheet'>
 
-	<!-- Bootstrap -->
-	<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+		<!-- Bootstrap -->
+		<!-- <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous"> -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
 
-	<!-- CSS -->
-	<link rel="stylesheet" href="public/css/style.css"/>
-	
-	<title>Votre équipe !</title>
-</head>
-<body>
-	<?php
-		include('header.php');
-	?>	
+		<!-- CSS -->
+		<link rel="stylesheet" href="public/css/style.css"/>
+		
+		<title>Votre équipe !</title>
+	</head>
+	<body>
+	<div class="header home">
+		<div class="menu-md">
+			<div class="menu-md__icon">
+				<div id="icon-bar-one"></div>
+				<div id="icon-bar-two"></div>
+				<div id="icon-bar-three"></div>
+			</div>
+			<div class="menu-md__hide">
+				<nav>
+					<ul class="">
+						<li class=""><a class="" href="">Accueil</a></li>
+						<li class=""><a class="" href="">Catalogue</a></li>
+						<li class=""><a class="" href="">Portfolio</a></li>
+						<li class=""><a class="" href="">FAQ</a></li>
+						<li class=""><a class="" href="">Contact</a></li>
+						<li class=""><a class="" href="">Blog</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		
+		<div class="header__logo">
+			<img src="images/logo-ecom-crea.png">
+		</div>
+		<nav class="nav-lg">
+			<ul class="">
+				<li class=""><a class="" href="">Accueil</a></li>
+				<li class=""><a class="" href="">Catalogue</a></li>
+				<li class=""><a class="" href="">Portfolio</a></li>
+				<li class=""><a class="" href="">FAQ</a></li>
+				<li class=""><a class="" href="">Contact</a></li>
+				<li class=""><a class="" href="">Blog</a></li>
+			</ul>
+		</nav>
+		<div class="header__cart">
+			<a href=""><span class="bi bi-bag-plus"></span></a>
+		</div>
+	</div>	
 	<div class="hero">
 		<div class="hero__text">
 			<h1>L'équipe secrète derrière les e-commerçants qui se détentent et chiffrent sans stress</h1>
