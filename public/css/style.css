@@ -856,4 +856,18 @@ h2 {
   }
 }
 
+.product-body {
+  padding: 1.875rem calc(2% + 15px);
+  color: #6D7D8B;
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+@media all and (min-width: 768px) {
+  .product-body {
+    font-size: 1.25rem;
+    width: 70%;
+    margin: auto;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */

@@ -118,3 +118,14 @@
         }
     }
 }
+.product-body {
+    padding: $space-between-30 $margin-left-right;
+    color: $paragraph-color;
+    font-size: 1.125rem;
+    font-weight: 400;
+    @include breakpoints-up(medium) {
+        font-size: 1.25rem;
+        width: 70%;
+        margin: auto;
+    }
+}
