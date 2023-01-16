@@ -39,7 +39,7 @@
                 <div class="quantity">
                     <label  for="quantity">Quantité</label>
                     <button class="quantity__button-down">-</button>
-                    <input type="text" id="quantity" value="1">
+                    <input type="number" id="quantity" value="1">
                     <button class="quantity__button-up">+</button>
                 </div>
                 <button class="add-to-cart">+ Ajouter au panier</button>

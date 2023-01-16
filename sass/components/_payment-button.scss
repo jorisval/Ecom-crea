@@ -1,0 +1,19 @@
+.payment-button {
+    font-family: $primary-font-family;
+    font-size: 1rem;
+    font-weight: 400;
+    color: $white-color;
+    padding: 0.625rem 1.75rem;
+    background-color: $primary-color;
+    border-radius: 2rem;
+    border-style: none;
+    display: inline-block;
+    cursor: pointer;
+    @include breakpoints-up(medium) {
+        padding: 1rem 1.75rem;
+    }
+    .bi {
+        font-size: 1.125rem;
+        margin-right: 0.5rem;
+    }
+}

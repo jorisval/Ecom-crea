@@ -1,5 +1,6 @@
 .header {
     display: flex;
+    position: relative;
     justify-content: space-between;
     padding: 0 $margin-left-right;
     margin: -0.5rem;
@@ -133,6 +134,114 @@
         color: $nav-color;
         @include breakpoints-up(medium) {
             font-size: 1.5rem;
+        }
+    }
+    .cart {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 100%;
+        display: none;
+        .background {
+            width: 75%;
+            height: 100vh;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+        &-content {
+            width: 35%;
+            min-width: 280px;
+            padding: 0.5rem 1rem;
+            background-color: $white-color;
+            color: $paragraph-color;
+            &__header {
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                padding-bottom: 0.375rem;
+                border-bottom: 1px $color-c4 solid;
+                font-size: 0.875rem;
+                @include breakpoints-up(large) {
+                    font-size: 1rem;
+                }
+            }
+            &-product {
+                font-size: 0.875rem;
+                display: flex;
+                margin-top: 0.9375rem;
+                padding-bottom: 0.75rem;
+                border-bottom: 1px $color-c4 solid;
+                @include breakpoints-up(large) {
+                    font-size: 1rem;
+                }
+                &__part1 {
+                    width: 30%;
+                    margin-right: 0.625rem;
+                    img {
+                        width: 100%;
+                        max-width: 6.25rem;
+                        border-radius: 0.5rem;
+                    }
+                }
+                &__part2 {
+                    width: 70%;
+                    margin-right: 0.625rem;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    &-title {
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 0.5rem;
+                    }
+                    &-option {
+                        margin-bottom: 0.5rem;
+                    }
+                    &-quantity {
+                        display: flex;
+                        justify-content: space-between;
+                        .quantity {
+                            color: $paragraph-color;
+                            button {
+                                font-size: 0.875rem;
+                                color: $paragraph-color;
+                                padding: 0.25rem 0.5rem;
+                                border: 1px $color-c4 solid;
+                                background-color: $white-color;
+                                cursor: pointer;
+                            }
+                            input {
+                                font-size: 0.875rem;
+                                color: $paragraph-color;
+                                padding-top: 0.25rem;
+                                padding-bottom: 0.25rem;
+                                text-align: center;
+                                width: 30px;
+                                border: 1px $color-c4 solid;
+                                margin: 0 -6px;
+                            }
+                        }
+                        .price {
+                            padding-top: 0.625rem;
+                        }
+                    }
+                }
+            }
+            &-subtotal {
+                font-size: 0.875rem;
+                display: flex;
+                justify-content: space-between;
+                margin-top: 1.25rem;
+                @include breakpoints-up(large) {
+                    font-size: 1rem;
+                }
+            }
+            &-payment {
+                text-align: center;
+                margin-top: 1.875rem;
+            }
+            .price {
+                color: $secondary-color;
+            }
         }
     }
 }
