@@ -1467,4 +1467,24 @@ h3 {
   }
 }
 
+.legal-content {
+  color: #6D7D8B;
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+  font-weight: 400;
+  margin: auto;
+  margin-top: 1.875rem;
+  margin-bottom: 3.75rem;
+  width: 80%;
+}
+@media all and (min-width: 768px) {
+  .legal-content {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    width: 70%;
+    margin-top: 3.75rem;
+    margin-bottom: 5.625rem;
+  }
+}
+
 /*# sourceMappingURL=style.css.map */
