@@ -26,6 +26,26 @@
                 outline: none;
             }
         }
+        .checkbox {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: $space-between-20;
+            #agree {
+                width: initial;
+                height: initial;
+                margin-right: 0.625rem;
+            }
+            label {
+                font-family: $primary-font-family;
+                font-size: 0.9375rem;
+                line-height: 1.375rem;
+                font-weight: 400;
+                color: $paragraph-color;
+                @include breakpoints-up(medium) {
+                    font-size: 1rem;
+                }
+            }
+        }
         input[type="submit"] {
             font-family: $primary-font-family;
             font-size: 0.875rem;

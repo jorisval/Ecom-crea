@@ -26,6 +26,7 @@
                 <div><input type="text" name="name" id="name" placeholder="Nom"></div>
                 <div><input type="email" name="email" id="email" placeholder="Email"></div>
                 <div><textarea name="comment" id="comment" rows="6" placeholder="Commentaire..."></textarea></div>
+                <div class="checkbox"><input type="checkbox" name="agree" id="agree"><label for="">Dans le but de ma demande personnelle via le formulaire, j'accepte à ce que mes données soient utilisées afin de me recontacter. Vos informations ne seront en aucun cas conservées à des fins commerciales.</label></div>
                 <div><input type="submit" value="Send"></div>
             </form>
         </div>

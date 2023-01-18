@@ -1425,6 +1425,28 @@ h3 {
 .contact-form form input:focus, .contact-form form textarea:focus {
   outline: none;
 }
+.contact-form form .checkbox {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 1.25rem;
+}
+.contact-form form .checkbox #agree {
+  width: initial;
+  height: initial;
+  margin-right: 0.625rem;
+}
+.contact-form form .checkbox label {
+  font-family: Urbanist, Arial, Sans-serif;
+  font-size: 0.9375rem;
+  line-height: 1.375rem;
+  font-weight: 400;
+  color: #6D7D8B;
+}
+@media all and (min-width: 768px) {
+  .contact-form form .checkbox label {
+    font-size: 1rem;
+  }
+}
 .contact-form form input[type=submit] {
   font-family: Urbanist, Arial, Sans-serif;
   font-size: 0.875rem;
