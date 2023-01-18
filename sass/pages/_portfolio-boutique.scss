@@ -1,6 +1,9 @@
 .portfolio {
     margin: 0 10%;
-    margin-bottom: $space-between-60;
+    margin-bottom: $space-between-20;
+    @include breakpoints-up(medium) {
+        margin-bottom: $space-between-60;
+    }
     &__menu {
         display: flex;
         justify-content: center;
