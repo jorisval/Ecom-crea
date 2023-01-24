@@ -20,5 +20,16 @@ $(function() {
     });
 
     //--- add to cart page
-    
+    $('.bi-bag-plus').on('click', function(e) {
+        $('.cart .background').css('display','block');
+        $('.cart-content').addClass('show');
+    });
+    $('.cart-content__header .bi-x').on('click', function(e) {
+        $('.cart-content').removeClass('show');
+        $('.cart .background').css('display','none');
+    });
+    $('.cart .background').on('click', function(e) {
+        $('.cart-content').removeClass('show');
+        $('.cart .background').css('display','none');
+    });
 });

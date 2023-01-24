@@ -10,12 +10,12 @@
         <div class="menu-md__hide">
             <nav>
                 <ul class="">
-                    <li class=""><a class="" href="">Accueil</a></li>
-                    <li class=""><a class="" href="">Catalogue</a></li>
-                    <li class=""><a class="" href="">Portfolio</a></li>
-                    <li class=""><a class="" href="">FAQ</a></li>
-                    <li class=""><a class="" href="">Contact</a></li>
-                    <li class=""><a class="" href="">Blog</a></li>
+                    <li class=""><a class="" href="index.php">Accueil</a></li>
+                    <li class=""><a class="" href="catalog.php">Catalogue</a></li>
+                    <li class=""><a class="" href="portfolio-boutique.php">Portfolio</a></li>
+                    <li class=""><a class="" href="legal.php">FAQ</a></li>
+                    <li class=""><a class="" href="contact.php">Contact</a></li>
+                    <li class=""><a class="" href="blog.php">Blog</a></li>
                 </ul>
             </nav>
         </div>
@@ -26,16 +26,16 @@
     </div>
     <nav class="nav-lg">
         <ul class="">
-            <li class=""><a class="" href="">Accueil</a></li>
-            <li class=""><a class="" href="">Catalogue</a></li>
-            <li class=""><a class="" href="">Portfolio</a></li>
-            <li class=""><a class="" href="">FAQ</a></li>
-            <li class=""><a class="" href="">Contact</a></li>
-            <li class=""><a class="" href="">Blog</a></li>
+            <li class=""><a class="" href="index.php">Accueil</a></li>
+            <li class=""><a class="" href="catalog.php">Catalogue</a></li>
+            <li class=""><a class="" href="portfolio-boutique.php">Portfolio</a></li>
+            <li class=""><a class="" href="legal.php">FAQ</a></li>
+            <li class=""><a class="" href="contact.php">Contact</a></li>
+            <li class=""><a class="" href="blog.php">Blog</a></li>
         </ul>
     </nav>
     <div class="header__cart">
-        <a href=""><span class="bi bi-bag-plus"></span></a>
+        <span class="bi bi-bag-plus"></span>
     </div>
     <div class="cart">
         <div class="background"></div>

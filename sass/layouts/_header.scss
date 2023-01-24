@@ -132,27 +132,36 @@
     .bi-bag-plus {
         font-size: 1.25rem;
         color: $nav-color;
+        cursor: pointer;
         @include breakpoints-up(medium) {
             font-size: 1.5rem;
         }
     }
     .cart {
-        position: fixed;
-        top: 0;
-        right: 0;
-        width: 100%;
-        display: none;
+        position: absolute;
+        z-index: 100;
         .background {
-            width: 75%;
+            width: 100%;
             height: 100vh;
             background-color: rgba(0, 0, 0, 0.8);
+            position: fixed;
+            top: 0;
+            right: 0;
+            display: none;
+
         }
         &-content {
+            box-sizing: border-box;
             width: 35%;
             min-width: 280px;
+            height: 100vh;
             padding: 0.5rem 1rem;
             background-color: $white-color;
             color: $paragraph-color;
+            position: fixed;
+            top: 0;
+            left: 100%;
+            transition: left 400ms ease;
             &__header {
                 width: 100%;
                 display: flex;
@@ -241,6 +250,15 @@
             }
             .price {
                 color: $secondary-color;
+            }
+            .bi-x {
+                cursor: pointer;
+            }
+            &.show {
+                left: calc(100% - 280px);
+                @media all and (min-width: 800px) {
+                    left: calc(100% - 35%);
+                }    
             }
         }
     }
