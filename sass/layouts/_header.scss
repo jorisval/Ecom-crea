@@ -227,6 +227,15 @@
                                 width: 30px;
                                 border: 1px $color-c4 solid;
                                 margin: 0 -6px;
+                                &::-webkit-inner-spin-button {
+                                    display: none;
+                                }
+                                &::-webkit-outer-spin-button {
+                                    display: none;
+                                }
+                                &:focus {
+                                    outline: none;
+                                }
                             }
                         }
                         .price {

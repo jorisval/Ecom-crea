@@ -328,6 +328,15 @@ h3 {
   border: 1px #c4c4c4 solid;
   margin: 0 -6px;
 }
+.header .cart-content-product__part2-quantity .quantity input::-webkit-inner-spin-button {
+  display: none;
+}
+.header .cart-content-product__part2-quantity .quantity input::-webkit-outer-spin-button {
+  display: none;
+}
+.header .cart-content-product__part2-quantity .quantity input:focus {
+  outline: none;
+}
 .header .cart-content-product__part2-quantity .price {
   padding-top: 0.625rem;
 }
@@ -1015,12 +1024,21 @@ h3 {
   text-align: center;
   width: 30px;
   border: 1px #c4c4c4 solid;
-  margin: 0 -5px;
+  margin: 0 -0.375rem;
 }
 @media all and (min-width: 768px) {
   .product-hero__part-2 .quantity input {
     font-size: 1.125rem;
   }
+}
+.product-hero__part-2 .quantity input::-webkit-inner-spin-button {
+  display: none;
+}
+.product-hero__part-2 .quantity input::-webkit-outer-spin-button {
+  display: none;
+}
+.product-hero__part-2 .quantity input:focus {
+  outline: none;
 }
 
 .product-body {

@@ -1,3 +1,4 @@
+
 $(function() {
     $('.menu-md__icon').click(function(){
         $('.menu-md__hide').toggleClass('show');
@@ -10,13 +11,28 @@ $(function() {
     
     //--- Product page
     //------Price section
-    var regexNumber = /[0-9]/;
-    var inputNumberElement = document.getElementById('quantity');
-    var testElement = document.querySelector(".product-title span");
-    $('#quantity__button-up').on('click',function(e) {
-        document.getElementById('quantity').value = inputNumberElement.value + 1;
-        console.log(document.getElementById('quantity').value);
-        testElement.textContent = document.getElementById('quantity').value + "€";
+    $('.product-hero__part-2 .quantity__button-down').on('click', function(){
+        var input = $('.product-hero__part-2 #quantity');
+        var inputValue = parseInt(input.val(), 10);
+        if (!isNaN(inputValue)) {
+            if (inputValue > 0) {
+                input.val(inputValue - 1);
+            } else {
+                input.val(0);
+            }
+            
+        } else {
+            input.val(1)
+        }
+    });
+    $('.product-hero__part-2 .quantity__button-up').on('click', function(){
+        var input = $('.product-hero__part-2 #quantity');
+        var inputValue = parseInt(input.val(), 10);
+        if (!isNaN(inputValue)) {
+            input.val(inputValue + 1);
+        } else {
+            input.val(1)
+        }
     });
 
     //--- add to cart page
@@ -32,4 +48,29 @@ $(function() {
         $('.cart-content').removeClass('show');
         $('.cart .background').css('display','none');
     });
+
+        //-- quantity section
+        $('.cart-content-product__part2-quantity .quantity__button-down').on('click', function(){
+            var input = $('.cart-content-product__part2-quantity #quantity');
+            var inputValue = parseInt(input.val(), 10);
+            if (!isNaN(inputValue)) {
+                if (inputValue > 0) {
+                    input.val(inputValue - 1);
+                } else {
+                    input.val(0);
+                }
+                
+            } else {
+                input.val(1)
+            }
+        });
+        $('.cart-content-product__part2-quantity .quantity__button-up').on('click', function(){
+            var input = $('.cart-content-product__part2-quantity #quantity');
+            var inputValue = parseInt(input.val(), 10);
+            if (!isNaN(inputValue)) {
+                input.val(inputValue + 1);
+            } else {
+                input.val(1)
+            }
+        });
 });
