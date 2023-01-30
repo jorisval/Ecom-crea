@@ -1,3 +1,4 @@
+<?php $currentPage = 'blog';?>
 <!DOCTYPE html>
 <html>
     <head>

@@ -1,3 +1,4 @@
+<?php $currentPage = 'portfolio';?>
 <!DOCTYPE html>
 <html>
     <head>

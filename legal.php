@@ -1,3 +1,4 @@
+<?php $currentPage = 'faq';?>
 <!DOCTYPE html>
 <html>
     <head>

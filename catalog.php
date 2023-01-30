@@ -1,3 +1,4 @@
+<?php $currentPage = 'catalog';?>
 <!DOCTYPE html>
 <html>
     <head>
