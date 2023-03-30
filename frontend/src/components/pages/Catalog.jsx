@@ -1,80 +1,52 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { HeaderContext } from "../utils/context";
+import { useFetch } from "../utils/hooks";
 
 function Catalog() {
     const { setActivePage } = useContext(HeaderContext);
     useEffect(() => {
         setActivePage("catalog");
     }, [setActivePage]);
+    const { data } = useFetch('http://localhost:3000/api/catalog');
+    const[showCount, setShowCount] = useState(8);
+    const handleClick = () => {
+        setShowCount(showCount + 8);
+    }
+    /*const [currentPage, setCurrentPage] = useState(1);
+    const [perPage] = useState(12);
+    const indexOfLastProduct = currentPage * perPage;
+    const indexOfFirstProduct = indexOfLastProduct - perPage;
+    const currentProducts = data?.slice(indexOfFirstProduct, indexOfLastProduct);
+    const pageNumber = [];
+
+    for(let i=1; i <= Math.ceil(data?.length / perPage); i++) {
+        pageNumber.push(i);
+    }
+
+    const handleClick = (event) => {
+        setCurrentPage(event.target.id)
+    }*/
+
     return(
         <div className="catalog">
-            <div class="pages-title">
-            <h1>Catalogue<span class="bi bi-chevron-double-right"></span></h1>
+            <div className="pages-title">
+            <h1>Catalogue<span className="bi bi-chevron-double-right"></span></h1>
         </div>
-        <div class="services-section catalog-services">
-            <div class="services">
-                <div class="service">
-                    <img src="../../assets/images/service-boutique.png" alt=""/>
-                    <p>Création de boutique Shopify</p>
-                    <span>150€</span>
-                </div>
-                <div class="service">
-                    <img src="../../assets/images/service-video.png" alt=""/>
-                    <p>Montage de vidéo publicitaire</p>
-                    <span>45€</span>
-                </div>
-                <div class="service">
-                    <img src="../../assets/images/service-copywriting.png" alt=""/>
-                    <p>Fiche produit</p>
-                    <span>15€</span>
-                </div>
-                <div class="service">
-                    <img src="../../assets/images/service-pack.png" alt=""/>
-                    <p>Pack bonus tout pour 200</p>
-                    <span>200€</span>
-                </div>
-                <div class="service">
-                    <img src="../../assets/images/service-boutique.png" alt=""/>
-                    <p>Création de boutique Shopify</p>
-                    <span>150€</span>
-                </div>
-                <div class="service">
-                    <img src="../../assets/images/service-video.png" alt=""/>
-                    <p>Montage de vidéo publicitaire</p>
-                    <span>45€</span>
-                </div>
-                <div class="service">
-                    <img src="../../assets/images/service-copywriting.png" alt=""/>
-                    <p>Fiche produit</p>
-                    <span>15€</span>
-                </div>
-                <div class="service">
-                    <img src="../../assets/images/service-pack.png" alt=""/>
-                    <p>Pack bonus tout pour 200</p>
-                    <span>200€</span>
-                </div>
-                <div class="service">
-                    <img src="../../assets/images/service-boutique.png" alt=""/>
-                    <p>Création de boutique Shopify</p>
-                    <span>150€</span>
-                </div>
-                <div class="service">
-                    <img src="../../assets/images/service-video.png" alt=""/>
-                    <p>Montage de vidéo publicitaire</p>
-                    <span>45€</span>
-                </div>
-                <div class="service">
-                    <img src="../../assets/images/service-copywriting.png" alt=""/>
-                    <p>Fiche produit</p>
-                    <span>15€</span>
-                </div>
-                <div class="service">
-                    <img src="../../assets/images/service-pack.png" alt=""/>
-                    <p>Pack bonus tout pour 200</p>
-                    <span>200€</span>
-                </div>
+        <div className="services-section catalog-services">
+            <div className="services">
+                { Array.isArray(data) && data.slice(0, showCount).map((product) => {
+                    return(
+                        <div className="service" key={product._id}>
+                            <img src={product.imageUrl} alt=""/>
+                            <p>{product.name}</p>
+                            <span>{product.price}€</span>
+                        </div>
+                    )
+                }) }
             </div>
-            <button class="cta-button">Voir plus</button>
+            {showCount < data?.length && (
+                <button className="cta-button" onClick={handleClick}>Voir plus</button>
+            )}
         </div>
         </div>
     );
