@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
 
@@ -37,9 +38,11 @@ function Catalog() {
                 { Array.isArray(data) && data.slice(0, showCount).map((product) => {
                     return(
                         <div className="service" key={product._id}>
-                            <img src={product.imageUrl} alt=""/>
-                            <p>{product.name}</p>
-                            <span>{product.price}€</span>
+                            <Link to={`/product/${product._id}`}>
+                                <img src={product.imageUrl} alt=""/>
+                                <p>{product.name}</p>
+                                <span>{product.price}€</span>
+                            </Link>
                         </div>
                     )
                 }) }

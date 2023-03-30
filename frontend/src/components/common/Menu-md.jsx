@@ -1,6 +1,9 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
+import { Link } from "react-router-dom";
+import { HeaderContext } from "../utils/context";
 
 function MenuMd() {
+    const {activePage} = useContext(HeaderContext);
     useEffect(() => {
         document.querySelector('.menu-md__icon').addEventListener('click', function () {
             const menuHide = document.querySelector('.menu-md__hide');
@@ -8,7 +11,7 @@ function MenuMd() {
             
             menuHide.classList.toggle('show');
             menuIcon.classList.toggle('active');
-        }, []);
+        });
         
         const menuHideLinks = document.querySelectorAll('.menu-md__hide a');
         menuHideLinks.forEach(function (link) {
@@ -20,7 +23,7 @@ function MenuMd() {
                 menuIcon.classList.remove('active');
             });
         });
-    });
+    }, []);
 
     return (
         <div className="menu-md">
@@ -32,12 +35,12 @@ function MenuMd() {
             <div className="menu-md__hide">
                 <nav>
                     <ul className="">
-                        <li className=""><a className="" href="index.php">Accueil</a></li>
-                        <li className=""><a className="" href="catalog.php">Catalogue</a></li>
-                        <li className=""><a className="" href="portfolio-boutique.php">Portfolio</a></li>
-                        <li className=""><a className="" href="legal.php">FAQ</a></li>
-                        <li className=""><a className="" href="contact.php">Contact</a></li>
-                        <li className=""><a className="" href="blog.php">Blog</a></li>
+                        <li className={ activePage === "home" ? "active" : "" }><Link to="/">Accueil</Link></li>
+                        <li className={ activePage === "catalog" ? "active" : "" }><Link to="/catalog">Catalogue</Link></li>
+                        <li className={ activePage === "portfolio-boutiques" || activePage === "portfolio-videos" ? "active" : "" }><Link to="/portfolio">Portfolio</Link></li>
+                        <li className={ activePage === "faq" ? "active" : "" }><Link to="/faq">FAQ</Link></li>
+                        <li className={ activePage === "contact" ? "active" : "" }><Link to="/contact">Contact</Link></li>
+                        <li className={ activePage === "blog" ? "active" : "" }><Link to="/blog">Blog</Link></li>
                     </ul>
                 </nav>
             </div>

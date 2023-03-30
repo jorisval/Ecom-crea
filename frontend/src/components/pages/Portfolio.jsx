@@ -31,7 +31,7 @@ function Portfolio() {
                 }
             </div>
             <div className="portfolio-button">
-                <button className="cta-button">Je veux les mêmes</button>
+                <Link to='/catalog' className="cta-button">Je veux les mêmes</Link>
             </div>
         </div>
     );

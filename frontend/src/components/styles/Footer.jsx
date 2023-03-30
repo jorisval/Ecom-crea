@@ -105,7 +105,7 @@ const FooterContainer = createGlobalStyle`
 
             p {
                 margin: 0;
-            }
+            } 
         }
     }
 `;

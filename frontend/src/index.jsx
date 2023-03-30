@@ -4,6 +4,7 @@ import {BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Footer from './components/common/Footer';
 import Header from './components/common/Header';
 import Blog from './components/pages/Blog';
+import Article from './components/pages/Article';
 import Catalog from './components/pages/Catalog';
 import Contact from './components/pages/Contact';
 import Home from './components/pages/Home';
@@ -25,13 +26,14 @@ root.render(
         <Routes>
           <Route path='/' element={<Home />}/>
           <Route path='/catalog' element={<Catalog />}/>
-          <Route path='/product' element={<Product />}/>
+          <Route path='/product/:productId' element={<Product />}/>
           <Route path='/portfolio' element={<Portfolio />}/>
           <Route path='/portfolio-boutiques' element={<PortfolioBoutique />}/>
           <Route path='/portfolio-videos' element={<PortfolioVideo />}/>
           <Route path='/faq' element={<Legal />}/>
           <Route path='/contact' element={<Contact />}/>
           <Route path='/blog' element={<Blog />}/>
+          <Route path='/article/:articleId' element={<Article />} />
         </Routes>
         <Footer />
       </HeaderProvider>

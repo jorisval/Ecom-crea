@@ -1,4 +1,5 @@
 import { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
 
@@ -49,16 +50,18 @@ function Blog() {
             { Array.isArray(currentPosts) && currentPosts.map((post) => {
                 return(
                     <div className="article" key={post._id}>
-                        <img src={post.imageUrl} alt=""/>
-                        <h3>
-                            {post.title.slice(0, 40)}
-                            {post.title.length > 40 && '...'}
-                        </h3>
-                        <p>
-                            {post.content.slice(0, 150)}
-                            {post.content.length > 150 && '...'}
-                        </p>
-                        <span>{formatedDate(post.dateCreated)}</span>
+                        <Link to={`/article/${post._id}`}>
+                            <img src={post.imageUrl} alt=""/>
+                            <h3>
+                                {post.title.slice(0, 40)}
+                                {post.title.length > 40 && '...'}
+                            </h3>
+                            <p>
+                                {post.content.slice(0, 150)}
+                                {post.content.length > 150 && '...'}
+                            </p>
+                            <span>{formatedDate(post.dateCreated)}</span>
+                        </Link>
                     </div>
                 )
             }) }

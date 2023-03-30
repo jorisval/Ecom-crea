@@ -38,6 +38,7 @@ h3 {
   display: inline-block;
   margin-bottom: 1.875rem;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .add-to-cart {
@@ -623,6 +624,9 @@ h3 {
     padding-bottom: 1.875rem;
   }
 }
+.services-section .services .service a {
+  text-decoration: none;
+}
 .services-section .services .service img {
   width: 100%;
   border-radius: 0.625rem 0.625rem 0 0;
@@ -1114,6 +1118,9 @@ h3 {
     padding-bottom: 1.875rem;
   }
 }
+.articles .article a {
+  text-decoration: none;
+}
 .articles .article img {
   width: 100%;
   border-radius: 0.625rem 0.625rem 0 0;
@@ -1341,6 +1348,9 @@ h3 {
   .services-section.catalog-services {
     margin-top: 1.25rem;
   }
+}
+.services-section.catalog-services a {
+  text-decoration: none;
 }
 
 .portfolio {

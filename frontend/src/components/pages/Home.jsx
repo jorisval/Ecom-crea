@@ -10,6 +10,7 @@ import IconUpdate from "../../assets/images/icone-update.png";
 import IconPrice from "../../assets/images/icone-price.png";
 import IconSatisfaction from "../../assets/images/icone-satisfaction.png";
 import { useFetch } from "../utils/hooks";
+import { Link } from "react-router-dom";
 
 
 function Home() {
@@ -25,7 +26,7 @@ function Home() {
                 <div className="hero__text">
                     <h1>L'équipe secrète derrière les e-commerçants qui se détentent et chiffrent sans stress</h1>
                     <p className="subtitle">Déléguez puis laissez l'équipe Ecom-crea s'occuper des tâches et concentrez-vous sur l’essentiel !</p>
-                    <button className="cta-button">Voir catalogue</button>
+                    <Link to='/catalog' className="cta-button">Voir catalogue</Link>
                     <div className="steps">
                         <div>
                             <span>1M+</span>
@@ -54,7 +55,7 @@ function Home() {
                     <h2>Dropshippeur ? L'équipe Ecom-crea s'occupe de tout !</h2>
                     <p>Recherche de produits, recherche de marchés inexploités, copywriting, boutique shopify, vidéos pour Facebook ads et Tiktok ads etc... Nous nous occupons de tout pour vous.
                     Notre objectif est de vous décharger de toutes ces tâches pour vous laisser vous occuper de l'essentiel et ainsi faire exploser votre business. </p>
-                    <a href="#d">Découvrir <span className="bi bi-arrow-right"></span></a>
+                    <Link to='/catalog'>Découvrir <span className="bi bi-arrow-right"></span></Link>
                 </div>
             </div>
             <div className="benefice-mb">
@@ -65,7 +66,7 @@ function Home() {
                     <h2>Media buying</h2>
                     <p>Facebook ads, Tiktok ads, Snapchat ads, Google ads, Pinterest ads, Marketink d'influence.. Nous nous occupons également de tout pour vous. 
                     <br/>Laissez-nous mettre à votre disposition notre réseau de professionnels, appliquer les bonnes stratégies à votre business et vous montrer la puissance de réseaux sociaux quand ils sont utilisés de la bonne manière !</p>
-                    <a href="#d">Découvrir <span className="bi bi-arrow-right"></span></a>
+                    <Link to='/catalog'>Découvrir <span className="bi bi-arrow-right"></span></Link>
                 </div>
             </div>
             <div className="benefice-sav">
@@ -76,7 +77,7 @@ function Home() {
                     <h2>Service après vente (SAV)</h2>
                     <p>Un client heureux est un bon embassadeur et revient toujours payer quand il a, de nouveau, besoin de vos produits et service. 
                         Laissez l'équipe Ecom-crea offir une expérience inédite à vos clients et votre chiffre d'affaire vous remerciera !</p>
-                    <a href="#d">Découvrir <span className="bi bi-arrow-right"></span></a>
+                        <Link to='/catalog'>Découvrir <span className="bi bi-arrow-right"></span></Link>
                 </div>
             </div>
             <div className="result">

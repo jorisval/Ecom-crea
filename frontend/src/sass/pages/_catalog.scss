@@ -25,4 +25,7 @@
     @include breakpoints-up(medium) {
         margin-top: $space-between-20;
     }
+    a {
+        text-decoration: none;
+    }
 }
