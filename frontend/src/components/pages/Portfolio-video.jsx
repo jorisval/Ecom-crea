@@ -1,85 +1,20 @@
-import { useContext, useEffect } from "react";
-import { HeaderContext } from "../utils/context";
+import { useFetch } from "../utils/hooks";
 
 function PortfolioVideo() {
-    const { setActivePage } = useContext(HeaderContext);
-    useEffect(() => {
-        setActivePage("portfolio-boutiques");
-    }, [setActivePage]);
+    const { data } = useFetch('http://localhost:3000/api/portfolio-video');
+
     return(
-        <div className="portfolio-video">
-            <div className="pages-title">
-                <h1>Portfolio<span className="bi bi-chevron-double-right"></span></h1>
-            </div>
-            <div className="portfolio">
-                <ul className="portfolio__menu">
-                    <li className="boutiques">
-                        <a href="#b" className="">Boutiques</a>
-                    </li>
-                    <li className="videos">
-                        <a href="#b" className="active">Vidéos</a>
-                    </li>
-                </ul>
-                <div className="portfolio__video-contents">
-                    <div className="video-container">
+        <div className="portfolio__video-contents">
+            {Array.isArray(data) && data.map((video) => {
+                return(
+                    <div className="video-container" key={video._id}>
                         <video controls>
-                            <source src="../../assets/videos/video-hair-1.mp4" type="video/mp4"/>
+                            <source src={video.videoUrl} type="video/mp4"/>
                             Your browser does not support the video tag.
                         </video>
                     </div>
-                    <div className="video-container">
-                        <video controls>
-                            <source src="../../assets/videos/video-toy-1.mp4" type="video/mp4"/>
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div className="video-container">
-                        <video controls>
-                            <source src="../../assets/videos/video-toy-2.mp4" type="video/mp4"/>
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div className="video-container">
-                        <video controls>
-                            <source src="../../assets/videos/video-hair-1.mp4" type="video/mp4"/>
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div className="video-container">
-                        <video controls>
-                            <source src="../../assets/videos/video-toy-1.mp4" type="video/mp4"/>
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div className="video-container">
-                        <video controls>
-                            <source src="../../assets/videos/video-toy-2.mp4" type="video/mp4"/>
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div className="video-container">
-                        <video controls>
-                            <source src="../../assets/videos/video-hair-1.mp4" type="video/mp4"/>
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div className="video-container">
-                        <video controls>
-                            <source src="../../assets/videos/video-toy-1.mp4" type="video/mp4"/>
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                    <div className="video-container">
-                        <video controls>
-                            <source src="../../assets/videos/video-toy-2.mp4" type="video/mp4"/>
-                            Your browser does not support the video tag.
-                        </video>
-                    </div>
-                </div>
-            </div>
-            <div className="portfolio-button">
-                <button className="cta-button">Je veux les mêmes</button>
-            </div>
+                )
+            })}
         </div>
     );
 }

@@ -8,6 +8,7 @@ import Catalog from './components/pages/Catalog';
 import Contact from './components/pages/Contact';
 import Home from './components/pages/Home';
 import Legal from './components/pages/Legal';
+import Portfolio from './components/pages/Portfolio';
 import PortfolioBoutique from './components/pages/Portfolio-boutique';
 import PortfolioVideo from './components/pages/Portfolio-video';
 import Product from './components/pages/Product';
@@ -25,8 +26,9 @@ root.render(
           <Route path='/' element={<Home />}/>
           <Route path='/catalog' element={<Catalog />}/>
           <Route path='/product' element={<Product />}/>
-          <Route path='/portfolio' element={<PortfolioBoutique />}/>
-          <Route path='/portfolio-video' element={<PortfolioVideo />}/>
+          <Route path='/portfolio' element={<Portfolio />}/>
+          <Route path='/portfolio-boutiques' element={<PortfolioBoutique />}/>
+          <Route path='/portfolio-videos' element={<PortfolioVideo />}/>
           <Route path='/faq' element={<Legal />}/>
           <Route path='/contact' element={<Contact />}/>
           <Route path='/blog' element={<Blog />}/>
