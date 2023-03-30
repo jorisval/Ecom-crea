@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import CatalogView from "../layout/catalog-view";
 import { HeaderContext } from "../utils/context";
 import Hero from "../../assets/images/hero.png";
@@ -18,14 +18,7 @@ function Home() {
         setActivePage('home');
     }, [setActivePage]);
     const { data } = useFetch('http://localhost:3000/api/client-result');
-    const [clientResultData, setClientResultData] = useState([]);
-
-    useEffect(() => {
-        if (data && Array.isArray(data) && data.length > 0) {
-        setClientResultData(data.slice(0, 12));
-        }
-    }, [data]);
-
+    
     return(
         <div className="home">
             <div className="hero">
@@ -89,7 +82,7 @@ function Home() {
             <div className="result">
                 <h2>Les résultats de nos clients parlent pour nous</h2>
                 <div className="result__elements">
-                    {clientResultData.map((result, index) => {
+                    {Array.isArray(data) && data.map((result, index) => {
                         return(
                             <img src={result.imageUrl} key={index} alt=""/>
                         )

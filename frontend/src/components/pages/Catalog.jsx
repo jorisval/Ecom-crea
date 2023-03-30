@@ -74,7 +74,7 @@ function Catalog() {
                     <span>200€</span>
                 </div>
             </div>
-            <button class="cta-button">Voir catalogue</button>
+            <button class="cta-button">Voir plus</button>
         </div>
         </div>
     );
