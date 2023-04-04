@@ -1,8 +1,15 @@
+import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CatalogView from "../layout/catalog-view";
+import { HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
 
 function Product() {
+    const { setActivePage } = useContext(HeaderContext);
+    useEffect(() => {
+        setActivePage("catalog");
+    }, [setActivePage]);
+
     const { productId } = useParams();
     const { data } = useFetch(`http://localhost:3000/api/catalog/${productId}`);
 

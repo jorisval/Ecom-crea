@@ -1,48 +1,127 @@
 const Product = require('../models/Product');
+const Option = require('../models/Option')
 const fs = require('fs');
 
 exports.createProduct = (req, res, next) => {
-    const productObject = req.body;
+    const {name, description, price, category, options, stock} = req.body;
+    const images = req.body.files.map(file => {
+        return req.protocol+'://'+req.get('host')+'/images/'+file.filename
+    });
     const product = new Product({
-        ...productObject,
-        imageUrl: req.protocol+'://'+req.get('host')+'/images/'+req.file.filename
+        name, description, price, category, images, stock
     });
     product.save()
-    .then(() => res.status(201).json({ message: 'Objet enregistré !'}))
+    .then((product) => {
+        const promisesOptions = options.map((option) => {
+            const {name, values} = option;
+            const optionModel = new Option({ product: product._id, name, values })
+            return optionModel.save();
+        })
+        Promise.all(promisesOptions)
+        .then(res.status(201).json({ message: 'Product saved !'}))
+        .catch(error => res.status(400).json({ error }));
+    })
     .catch(error => res.status(400).json({ error }));
-}
+};
+
+
 exports.getOneProduct = (req, res, next) => {
     Product.findOne({ _id: req.params.id })
-    .then(product => res.status(200).json(product))
+    .populate('options')
+    .then((product) => {
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+        res.status(200).json(product)
+    })
     .catch(error => res.status(404).json({ error }));
-}
+};
+
+
 exports.modifyProduct = (req, res, next) => {
-    const productObject = req.file ? {
-        ...JSON.parse(req.body.product),
-        imageUrl: req.protocol+'://'+req.get('host')+'/images/'+req.file.filename
-    } : { ...req.body };
-    Product.findOne({ _id: req.params.id })
+    const {name, description, price, category, options, stock} = req.body;
+    const images = req.body.files ? (
+        req.body.files.map(file => {
+        return req.protocol+'://'+req.get('host')+'/images/'+file.filename
+    })) : '';
+    const productObject = req.body.files ? {
+        name, description, price, category, images, stock
+    } : { 
+        name, description, price, category, stock 
+    };
+    Product.findOne({ _id: req.params.productId })
     .then(() => {
-        Product.updateOne({ _id: req.params.id }, { ...productObject, _id: req.params.id })
-        .then(() => res.status(200).json({ message: 'Objet modifié!' }))
+        Product.updateOne({ _id: req.params.productId }, { ...productObject, _id: req.params.productId })
+        .then(() => res.status(200).json({ message: 'Product updated!' }))
         .catch(error => res.status(401).json({ error }));
     })
     .catch(error => res.status(400).json({ error }));
-}
+};
+
+
+exports.modifyOption = (req, res) => {
+    const optionId = req.params.optionId;
+    const { name, values } = req.body;
+  
+    Option.findByIdAndUpdate(optionId, { name, values }, { new: true })
+      .then(option => {
+        if (!option) {
+          return res.status(404).json({ error: 'Option not found' });
+        }
+        res.status(200).json({ message: 'Option updated !' });
+      })
+      .catch(error => res.status(400).json({ error }));
+};
+
+
 exports.deleteProduct = (req, res, next) => {
-    Product.findOne({ _id: req.params.id })
+    const productId = req.params.productId
+
+    // Find the product by ID
+    Product.findOne({ _id: productId })
     .then(product => {
-        const filename = product.imageUrl.split('/images/')[1];
-        fs.unlink('images/'+ filename, () => {
-            Product.deleteOne({_id: req.params.id})
-            .then(() => res.status(200).json({ message: 'Odject deleted!' }))
-            .catch(error => res.status(401).json({ error }));
+        if (!product) {
+            return res.status(404).json({ error: 'Product not found' });
+        }
+
+        // Delete each image associated with the product
+        const imagesUrl = product.images
+        for(const imageUrl of imagesUrl) {
+            const filename = imageUrl.split('/images/')[1];
+            fs.unlink('images/'+ filename, () => {})
+        }
+
+        // Delete the product from the database
+        Product.findByIdAndDelete(productId)
+        .then(() => {
+            // Delete all options associated with the product
+            Option.deleteMany({ product: productId })
+            .then(() => res.status(200).json({ message: 'Product and options deleted' }))
+            .catch(error => res.status(400).json({ error }));
         })
+        .catch(error => res.status(400).json({ error }))
     })
     .catch(error => res.status(401).json({error }));
-}
+};
+
+// DELETE an option
+exports.deleteOption = (req, res) => {
+    const optionId = req.params.optionId;
+  
+    Option.findByIdAndDelete(optionId)
+      .then(option => {
+        if (!option) {
+          return res.status(404).json({ error: 'Option not found' });
+        }
+        res.status(200).json({ message: 'Option deleted' });
+    })
+    .catch(error => res.status(400).json({ error }));
+};
+
+
 exports.getAllProducts = (req, res, next) => {
     Product.find()
+    .populate('options')
     .then(products => res.status(200).json(products))
     .catch(error => res.status(400).json({ error }));
-}
+};

@@ -61,7 +61,7 @@ const storagePostImage = multer.diskStorage({
     }
 });
 
-const multerProductImage = multer({ storage: storageProductImage }).single('productImage');
+const multerProductImage = multer({ storage: storageProductImage }).array('productImage');
 const multerClientResultImage = multer({ storage: storageClientResultImage }).array('clientResultImage');
 const multerPortfolioShop = multer({ storage: storagePortfolioShop }).array('portfolioShop');
 const multerPortfolioVideo = multer({ storage: storagePortfolioVideo }).array('portfolioVideo');
