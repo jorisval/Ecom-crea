@@ -8,5 +8,9 @@ router.get('/:id', postCtrl.getOnePost);
 router.put('/:id', multerPostImage, postCtrl.modifyPost);
 router.delete('/:id', postCtrl.deletePost);
 router.get('/', postCtrl.getAllPosts);
+router.post('/post-comment/', postCtrl.createPostComment);
+router.get('/post-comment/', postCtrl.getPostComments);
+router.delete('/post-comment/:commentId', postCtrl.deleteComment);
+router.get('/post-user/', postCtrl.getPostUsers);
 
 module.exports = router;

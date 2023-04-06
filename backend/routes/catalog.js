@@ -8,5 +8,7 @@ router.get('/:id', catalogCtrl.getOneProduct);
 router.put('/:id', multerProductImage, catalogCtrl.modifyProduct);
 router.delete('/:id', catalogCtrl.deleteProduct);
 router.get('/', catalogCtrl.getAllProducts);
+router.put('/option/:optionId', catalogCtrl.modifyOption);
+router.delete('/option/:optionId', catalogCtrl.deleteOption);
 
 module.exports = router;

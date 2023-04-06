@@ -61,18 +61,16 @@ exports.createPostComment = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 }
 
+exports.deleteComment = (req, res, next) => {
+    PostComment.findByIdAndDelete(req.params.commentId)
+    .then(() => res.status(200).json({ message: 'Comment deleted!' }))
+    .catch(error => res.status(400).json({ error }));
+};
+
 exports.getPostComments = (req, res, next) => {
     PostComment.find({ post: req.params.postId })
     .populate('author')
     .then(comments => res.status(200).json(comments))
-    .catch(error => res.status(400).json({ error }));
-}
-
-exports.createPostUser = (req, res, next) => {
-    const postUserObject = req.body;
-    const postUser = new PostUser(postUserObject);
-    postUser.save()
-    .then(() => res.status(201).json({ message: 'Post user saved !'}))
     .catch(error => res.status(400).json({ error }));
 }
 
@@ -82,3 +80,5 @@ exports.getPostUsers = (req, res, next) => {
     .catch(error => res.status(400).json({ error }));
 }
 
+
+  
