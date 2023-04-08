@@ -37,6 +37,20 @@ exports.getOneProduct = (req, res, next) => {
     .catch(error => res.status(404).json({ error }));
 };
 
+exports.getProducts = (req, res) => {
+    const productIds = req.body.productIds;
+
+    if (!Array.isArray(productIds)) {
+        return res.status(400).json({ error: 'productIds must be an array' });
+    }
+
+    Product.find({ _id: { $in: productIds } })
+        .populate('options')
+        .then(products => {
+            res.status(200).json(products);
+        })
+        .catch(error => res.status(500).json({ error }));
+}
 
 exports.modifyProduct = (req, res, next) => {
     const {name, description, price, category, options, stock} = req.body;

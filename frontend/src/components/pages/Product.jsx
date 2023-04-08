@@ -1,7 +1,7 @@
-import { useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CatalogView from "../layout/catalog-view";
-import { HeaderContext } from "../utils/context";
+import { CartContext, HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
 
 function Product() {
@@ -12,6 +12,39 @@ function Product() {
 
     const { productId } = useParams();
     const { data } = useFetch(`http://localhost:3000/api/catalog/${productId}`);
+    const { setOrderInfos, orderItem, setOrderItem} = useContext(CartContext);
+    const [quantity, setQuantity] = useState(1);
+
+    useEffect(() => {
+        const divElmts = document.querySelectorAll('.option__case div');
+        divElmts.forEach((divElmt) => {
+            divElmt.addEventListener('click', (e) => {
+                // Remove active class from all the options
+                divElmts.forEach((el) => {
+                  el.classList.remove('active');
+                });
+                // Add active class to the clicked option
+                e.target.classList.add('active');
+            });
+        });
+        
+        document.querySelector('.add-to-cart').addEventListener('click', function(e) {
+            document.querySelector('.cart .background').style.display = 'block';
+            document.querySelector('.cart-content').classList.add('show');
+        });
+    }, [])
+    
+    const handleAddToCart = () => {
+        const updatedOrderItem = {...orderItem, quantity: quantity};
+        setOrderItem(updatedOrderItem);
+        
+        setOrderInfos(prevOrderInfos => {
+            return {
+                ...prevOrderInfos,
+                orderItems: [...prevOrderInfos.orderItems, updatedOrderItem]
+            };
+        });
+    };
 
     return(
         <div className="contact">
@@ -24,24 +57,27 @@ function Product() {
                         <h2>{data.name}</h2>
                         <span>{data.price}€</span>
                     </div>
-                    <div className="option">
-                        <p>Option</p>
-                        <div className="option__case">
-                            <div>Pack 1</div>
-                            <div>Pack 2</div>
-                            <div>Pack 3</div>
-                            <div>Retouche illimitée</div>
-                            <div>Langue au choix</div>
-                            <div>Livraison express</div>
-                        </div>
-                    </div>
+                    { data.options && data.options.map(option => {
+                        return(
+                            <div className="option">
+                                <p>{option.name}</p>
+                                <div className="option__case">
+                                    {option.values && option.values.map((value, index) => {
+                                        return(
+                                            <div className={value} key={index} onClick={() => setOrderItem({option: value, productId: data._id, price: data.price})}>{value}</div>
+                                        )
+                                    })}
+                                </div>
+                            </div>
+                        )
+                    }) }
                     <div className="quantity">
                         <label  for="quantity">Quantité</label>
-                        <button className="quantity__button-down">-</button>
-                        <input type="number" id="quantity" defaultValue="1"/>
-                        <button className="quantity__button-up">+</button>
+                        <button className="quantity__button-down" onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}>-</button>
+                        <input type="number" id="quantity" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))} />
+                        <button className="quantity__button-up" onClick={() => setQuantity(quantity + 1)}>+</button>
                     </div>
-                    <button className="add-to-cart">+ Ajouter au panier</button>
+                    <button className="add-to-cart" onClick={() => handleAddToCart()}>+ Ajouter au panier</button>
                 </div>
             </div>
             <div className="product-body">

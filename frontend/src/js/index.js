@@ -41,6 +41,10 @@ $(function() {
         $('.cart .background').css('display','block');
         $('.cart-content').addClass('show');
     });
+    $('.add-to-cart').on('click', function(e) {
+        $('.cart .background').css('display','block');
+        $('.cart-content').addClass('show');
+    });
     $('.cart-content__header .bi-x').on('click', function(e) {
         $('.cart-content').removeClass('show');
         $('.cart .background').css('display','none');

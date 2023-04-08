@@ -123,6 +123,7 @@ exports.createNewOrder = (req, res, next) => {
                         const orderItemModel = new OrderItem({
                             order: order._id,
                             product: orderItem.productId,
+                            option: orderItem.option,
                             price: orderItem.price,
                             quantity: orderItem.quantity,
                         });
@@ -199,6 +200,7 @@ exports.createNewOrder = (req, res, next) => {
                             const orderItemModel = new OrderItem({
                                 order: order._id,
                                 product: orderItem.productId,
+                                option: orderItem.option,
                                 price: orderItem.price,
                                 quantity: orderItem.quantity,
                             });

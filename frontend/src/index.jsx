@@ -14,28 +14,30 @@ import PortfolioBoutique from './components/pages/Portfolio-boutique';
 import PortfolioVideo from './components/pages/Portfolio-video';
 import Product from './components/pages/Product';
 import StyledHeader from './components/styles/Header';
-import { HeaderProvider } from './components/utils/context';
+import { CartProvider, HeaderProvider } from './components/utils/context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <Router>
       <HeaderProvider>
-        <StyledHeader />
-        <Header />
-        <Routes>
-          <Route path='/' element={<Home />}/>
-          <Route path='/catalog' element={<Catalog />}/>
-          <Route path='/product/:productId' element={<Product />}/>
-          <Route path='/portfolio' element={<Portfolio />}/>
-          <Route path='/portfolio-boutiques' element={<PortfolioBoutique />}/>
-          <Route path='/portfolio-videos' element={<PortfolioVideo />}/>
-          <Route path='/faq' element={<Legal />}/>
-          <Route path='/contact' element={<Contact />}/>
-          <Route path='/blog' element={<Blog />}/>
-          <Route path='/article/:articleId' element={<Article />} />
-        </Routes>
-        <Footer />
+        <CartProvider>
+          <StyledHeader />
+          <Header />
+          <Routes>
+            <Route path='/' element={<Home />}/>
+            <Route path='/catalog' element={<Catalog />}/>
+            <Route path='/product/:productId' element={<Product />}/>
+            <Route path='/portfolio' element={<Portfolio />}/>
+            <Route path='/portfolio-boutiques' element={<PortfolioBoutique />}/>
+            <Route path='/portfolio-videos' element={<PortfolioVideo />}/>
+            <Route path='/faq' element={<Legal />}/>
+            <Route path='/contact' element={<Contact />}/>
+            <Route path='/blog' element={<Blog />}/>
+            <Route path='/article/:articleId' element={<Article />} />
+          </Routes>
+          <Footer />
+        </CartProvider>
       </HeaderProvider>
     </Router>
   </React.StrictMode>
