@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Form</title>
+  </head>
+  <body>
+    <h1>Test Form</h1>
+    <form method="post" action="http://localhost:3000/api/contact/comment/">
+      <div>
+        <input type="text" name="name" id="name" placeholder="Nom" />
+      </div>
+      <div>
+        <input type="email" name="email" id="email" placeholder="Email" />
+      </div>
+      <div>
+        <textarea
+          name="comment"
+          id="comment"
+          rows="6"
+          placeholder="Commentaire..."
+        ></textarea>
+      </div>
+      <div>
+        <input type="checkbox" name="agree" id="agree" />
+        <label>
+          Dans le but de ma demande personnelle via le formulaire, j'accepte à
+          ce que mes données soient utilisées afin de me recontacter. Vos
+          informations ne seront en aucun cas conservées à des fins
+          commerciales.
+        </label>
+      </div>
+      <div>
+        <input type="submit" value="Send" />
+      </div>
+    </form>
+  </body>
+</html>

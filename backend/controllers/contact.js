@@ -3,7 +3,7 @@ const ContactContent = require('../models/Contact-content');
 
 //Create a new contact or/and new comment
 exports.createContactComment = (req, res) => {
-    const { name, email, comment } = req.body;
+    const { name, email, comment, agree } = req.body;
 
     ContactInfo.findOne({ email })
     .then(contact => {
@@ -13,10 +13,10 @@ exports.createContactComment = (req, res) => {
                 comment
             })
             newContactContent.save()
-            .then(() => res.status(200).json({message: 'Comment saved !'}))
-            .catch(error => res.status(400).json(error));
+            .then(() => res.status(200).json({ message: 'Comment saved !'}))
+            .catch(error => res.status(400).json({ message: 'Error saving comment', error }));
         } else {
-            const newContact = new ContactInfo({ name, email });
+            const newContact = new ContactInfo({ name, email, agree });
             newContact.save()
             .then((contact) => {
                 const newContactContent = new ContactContent({
@@ -24,13 +24,13 @@ exports.createContactComment = (req, res) => {
                     comment
                 })
                 newContactContent.save()
-                .then(() => res.status(200).json({message: 'Contact and comment saved !'}))
-                .catch(error => res.status(400).json(error));
+                .then(() => res.status(200).json({ message: 'Contact and comment saved !'}))
+                .catch(error => res.status(400).json({ message: 'Error saving contact and comment', error }));
             })
-            .catch(error => res.status(400).json(error));
+            .catch(error => res.status(400).json({ message: 'Error saving contact', error }));
         }
     })
-    .catch(error => res.status(400).json(error));  
+    .catch(error => res.status(400).json({ message: 'Error processing request', error }));
 }
 
 //Return all contact info documents
@@ -59,10 +59,10 @@ exports.getAllCommentOfContact = (req, res) => {
 
 //Update an existing contact info document
 exports.updateContactInfo = (req, res) => {
-    const { name, email } = req.body;
+    const { name, email, agree } = req.body;
     const contactId = req.params.contactId;
 
-    ContactInfo.findByIdAndUpdate(contactId, { name, email }, { new: true })
+    ContactInfo.findByIdAndUpdate(contactId, { name, email, agree }, { new: true })
         .then(updatedContact => {
             res.status(200).json(updatedContact);
         })
