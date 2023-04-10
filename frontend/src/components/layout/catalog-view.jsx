@@ -10,7 +10,6 @@ function CatalogView() {
         setCatalogViewData(data.slice(0, 4));
         }
     }, [data]);
-    console.log(catalogViewData[0]);
     return (
         <div className="services-section">
             <div className="services">
@@ -18,7 +17,7 @@ function CatalogView() {
                     return(
                         <div className="service" key={index}>
                             <Link to={`/product/${product._id}`}>
-                                <img src={product.imageUrl} alt=""/>
+                                <img src={product.images[0]} alt=""/>
                                 <p>{product.name}</p>
                                 <span>{product.price}€</span>
                             </Link>

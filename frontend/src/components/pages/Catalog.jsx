@@ -39,7 +39,7 @@ function Catalog() {
                     return(
                         <div className="service" key={product._id}>
                             <Link to={`/product/${product._id}`}>
-                                <img src={product.imageUrl} alt=""/>
+                                <img src={product.images[0]} alt=""/>
                                 <p>{product.name}</p>
                                 <span>{product.price}€</span>
                             </Link>

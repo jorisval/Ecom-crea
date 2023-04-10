@@ -12,7 +12,7 @@ const VIDEO_MIME_TYPES = {
 
 const storageProductImage = multer.diskStorage({
     destination: (req, file, callback) => {
-        callback(null, 'images');
+        callback(null, 'images/products');
     },
     filename: (req, file, callback) => {
         const extension = MIME_TYPES[file.mimetype];
@@ -61,7 +61,7 @@ const storagePostImage = multer.diskStorage({
     }
 });
 
-const multerProductImage = multer({ storage: storageProductImage }).array('productImage');
+const multerProductImage = multer({ storage: storageProductImage }).array('images');
 const multerClientResultImage = multer({ storage: storageClientResultImage }).array('clientResultImage');
 const multerPortfolioShop = multer({ storage: storagePortfolioShop }).array('portfolioShop');
 const multerPortfolioVideo = multer({ storage: storagePortfolioVideo }).array('portfolioVideo');

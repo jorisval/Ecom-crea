@@ -1,27 +1,39 @@
 const Product = require('../models/Product');
-const Option = require('../models/Option')
+const Option = require('../models/Option');
 const fs = require('fs');
 
 exports.createProduct = (req, res, next) => {
     const {name, description, price, category, options, stock} = req.body;
-    const images = req.body.files.map(file => {
-        return req.protocol+'://'+req.get('host')+'/images/'+file.filename
+    const images = req.files.map(file => {
+        return req.protocol+'://'+req.get('host')+'/images/products/'+file.filename
     });
     const product = new Product({
         name, description, price, category, images, stock
     });
     product.save()
-    .then((product) => {
-        const promisesOptions = options.map((option) => {
+    .then((product) => { 
+        const parsedOptions = JSON.parse(options);
+        const promisesOptions = parsedOptions.map((option) => {
             const {name, values} = option;
             const optionModel = new Option({ product: product._id, name, values })
             return optionModel.save();
         })
         Promise.all(promisesOptions)
-        .then(res.status(201).json({ message: 'Product saved !'}))
-        .catch(error => res.status(400).json({ error }));
+        .then((savedOptions) => {
+            product.options = savedOptions.map((option) => option._id);
+            product.save()
+            .then(() => res.status(201).json({ message: "Product saved!" }))
+            .catch((error) => res.status(400).json({ error }));
+        })
+        .catch(error => {
+            console.error('Error saving options 1:', error);
+            res.status(400).json({ error })
+        });
     })
-    .catch(error => res.status(400).json({ error }));
+    .catch(error => {
+        console.error('Error saving options 2:', error);
+        res.status(400).json({ error })
+    });
 };
 
 
@@ -53,12 +65,12 @@ exports.getProducts = (req, res) => {
 }
 
 exports.modifyProduct = (req, res, next) => {
-    const {name, description, price, category, options, stock} = req.body;
-    const images = req.body.files ? (
-        req.body.files.map(file => {
-        return req.protocol+'://'+req.get('host')+'/images/'+file.filename
+    const {name, description, price, category, stock} = req.body;
+    const images = req.files ? (
+        req.files.map(file => {
+        return req.protocol+'://'+req.get('host')+'/images/products/'+file.filename
     })) : '';
-    const productObject = req.body.files ? {
+    const productObject = req.files ? {
         name, description, price, category, images, stock
     } : { 
         name, description, price, category, stock 
@@ -101,8 +113,8 @@ exports.deleteProduct = (req, res, next) => {
         // Delete each image associated with the product
         const imagesUrl = product.images
         for(const imageUrl of imagesUrl) {
-            const filename = imageUrl.split('/images/')[1];
-            fs.unlink('images/'+ filename, () => {})
+            const filename = imageUrl.split('/images/products/')[1];
+            fs.unlink('images/products/'+ filename, () => {})
         }
 
         // Delete the product from the database

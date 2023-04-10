@@ -20,7 +20,7 @@ mongoose.connect('mongodb+srv://jorisawoui:creadata07@cluster0.zog3i4t.mongodb.n
 
 // Middleware for parsing JSON and URL-encoded form data
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
