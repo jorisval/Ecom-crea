@@ -1,27 +1,40 @@
 import { useEffect, useContext, useState } from "react";
 import { CartContext } from "../utils/context";
-import { useFetch } from "../utils/hooks";
 
 function Cart() {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     let productIds = [];
     const [subtotal, setSubtotal] = useState(0);
-    const {orderInfos, setOrderInfos} = useContext(CartContext);
+    const { orderInfos, setOrderInfos } = useContext(CartContext);
+    const [products, setProducts] = useState([]);
 
-    if(orderInfos.orderItems) {
-        orderInfos.orderItems.forEach(item => {
-            productIds.push(item.productId);
+    if (orderInfos.orderItems) {
+        orderInfos.orderItems.forEach((item) => {
+        productIds.push(item.productId);
         });
     }
-    
+
     useEffect(() => {
         let newSubtotal = 0;
-        orderInfos.orderItems.forEach(item => {
-            newSubtotal += item.price * item.quantity;
+        orderInfos.orderItems.forEach((item) => {
+        newSubtotal = newSubtotal + item.price * item.quantity;
         });
         setSubtotal(newSubtotal);
     }, [orderInfos.orderItems]);
 
-    const { data } = useFetch(`http://localhost:3000/api/catalog/products/${productIds}`);
+    useEffect(() => {
+        if (productIds.length > 0) {
+        const fetchProducts = async () => {
+            const requests = productIds.map((id) =>
+            fetch(`http://localhost:3000/api/catalog/${id}`).then((res) => res.json())
+            );
+            const products = await Promise.all(requests);
+            setProducts(products);
+        };
+        fetchProducts();
+        }
+    }, [productIds]);
+
     
     useEffect(() => {
         document.querySelector('.bi-bag-plus').addEventListener('click', function(e) {
@@ -37,13 +50,10 @@ function Cart() {
         document.querySelector('.cart .background').addEventListener('click', function(e) {
             document.querySelector('.cart-content').classList.remove('show');
             document.querySelector('.cart .background').style.display = 'none';
-        });
-        
-        document.querySelector('.cart-content__header .bi-x').addEventListener('click', function(e) {
-            document.querySelector('.cart-content').classList.remove('show');
-            document.querySelector('.cart .background').style.display = 'none';
-        });          
+        });      
     }, []);
+
+
 
     const downQuantity = (index) => {
         setOrderInfos(prevOrderInfos => {
@@ -85,7 +95,6 @@ function Cart() {
                 }
                 return item;
             });
-    
             return {
                 ...prevOrderInfos,
                 orderItems: updatedOrderItems
@@ -111,17 +120,18 @@ function Cart() {
                     <span>Panier</span>
                     <span className="bi bi-x"></span>
                 </div>
-                <div className="cart-content-product">
-                    {Array.isArray(data) && data.map((item, index) => {
-                        let itemIndex = 0;
+                <div>
+                    {products && products.map((item, index) => {
+                        const itemIndex = orderInfos.orderItems.findIndex(
+                            (product) => product.productId === item._id
+                        );
+                        // Do not render the item if it doesn't exist in orderInfos.orderItems
+                        if (itemIndex === -1) {
+                            return null;
+                        }
+
                         return(
-                            <div key={index}>
-                                {orderInfos.orderItems.map((product, ind) => {
-                                    if (product.productId === item._id) {
-                                        itemIndex = ind;
-                                    }
-                                    return null;
-                                })}
+                            <div className="cart-content-product" key={index}>
                                 <div className="cart-content-product__part1">
                                     <img src={item.images[0]} alt="" />
                                 </div>

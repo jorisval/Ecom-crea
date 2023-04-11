@@ -1,6 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CatalogView from "../layout/catalog-view";
+import ProductStyled from "../styles/Product";
 import { CartContext, HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
 
@@ -14,21 +15,11 @@ function Product() {
     const { data } = useFetch(`http://localhost:3000/api/catalog/${productId}`);
     const { setOrderInfos, orderItem, setOrderItem} = useContext(CartContext);
     const [quantity, setQuantity] = useState(1);
+    const [activeOption, setActiveOption] = useState(null);
+
 
     useEffect(() => {
         if (data) {
-            const divElmts = document.querySelectorAll('.option__case div');
-            divElmts.forEach((divElmt) => {
-                divElmt.addEventListener('click', (e) => {
-                // Remove active class from all the options
-                divElmts.forEach((el) => {
-                    el.classList.remove('active');
-                });
-                // Add active class to the clicked option
-                e.target.classList.add('active');
-                });
-            });
-        
             const addToCartButton = document.querySelector('.add-to-cart');
             if (addToCartButton) {
                 addToCartButton.addEventListener('click', function (e) {
@@ -52,7 +43,7 @@ function Product() {
     };
 
     return(
-        <>
+        <ProductStyled>
             {data && data.images ? (
                 <div className="contact">
                     <div className="product-hero">
@@ -71,7 +62,14 @@ function Product() {
                                         <div className="option__case">
                                             {option.values && option.values.map((value, index) => {
                                                 return(
-                                                    <div className={value} key={index} onClick={() => setOrderItem({option: value, productId: data._id, price: data.price})}>{value}</div>
+                                                    <div 
+                                                    className={value === activeOption ? "active" : ""} 
+                                                    key={index} 
+                                                    onClick={() => {
+                                                        setActiveOption(value);
+                                                        setOrderItem({option: value, productId: data._id, price: data.price
+                                                        })
+                                                    }}>{value}</div>
                                                 )
                                             })}
                                         </div>
@@ -99,7 +97,7 @@ function Product() {
             ) : (
                 <p>Loading...</p>
             )}
-        </>
+        </ProductStyled>
     );
 }
 

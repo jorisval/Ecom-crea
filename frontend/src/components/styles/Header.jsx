@@ -223,6 +223,7 @@ const HeaderContainer = createGlobalStyle`
             margin-top: 0.9375rem;
             padding-bottom: 0.75rem;
             border-bottom: 1px ${theme.colors.colorC4} solid;
+            width: 100%;
 
             @media (min-width: ${theme.breakpoints.up.large}) {
             font-size: 1rem;
