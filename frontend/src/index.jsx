@@ -15,6 +15,8 @@ import PortfolioVideo from './components/pages/Portfolio-video';
 import Product from './components/pages/Product';
 import StyledHeader from './components/styles/Header';
 import { CartProvider, HeaderProvider } from './components/utils/context';
+import Checkout from './components/pages/Checkout';
+import ThankYou from './components/pages/Thank-you';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -28,6 +30,8 @@ root.render(
             <Route path='/' element={<Home />}/>
             <Route path='/catalog' element={<Catalog />}/>
             <Route path='/product/:productId' element={<Product />}/>
+            <Route path='/checkout' element={<Checkout />}/>
+            <Route path='/thank-you' element={<ThankYou />}/>
             <Route path='/portfolio' element={<Portfolio />}/>
             <Route path='/portfolio-boutiques' element={<PortfolioBoutique />}/>
             <Route path='/portfolio-videos' element={<PortfolioVideo />}/>

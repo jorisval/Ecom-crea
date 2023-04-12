@@ -1,8 +1,10 @@
-import { useContext, useEffect } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
+import ThankYouPopup from "./Thank-you-contact";
 
 function Contact() {
+    const [showThankYouPopup, setShowThankYouPopup] = useState(false);
     const { setActivePage } = useContext(HeaderContext);
     const navigate = useNavigate();
     useEffect(() => {
@@ -33,15 +35,18 @@ function Contact() {
 
             // Reset the form
             event.target.reset();
-
-            // Redirect to the home page
-            navigate("/");
-
+            
+            //Redirect to the home page
+            setShowThankYouPopup(true);
         } catch (error) {
             console.error("Error:", error);
         }
     }
-      
+    
+    const handleCloseThankYouPopup = () => {
+        setShowThankYouPopup(false);
+        navigate('/contact');
+      };
 
     return(
         <div className="contact">
@@ -57,6 +62,10 @@ function Contact() {
                     <div><input type="submit" value="Send"/></div>
                 </form>
             </div>
+            {showThankYouPopup && (
+                <ThankYouPopup onClose={handleCloseThankYouPopup} />
+            )}
+
         </div>
     );
 }

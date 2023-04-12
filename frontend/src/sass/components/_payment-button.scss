@@ -9,6 +9,7 @@
     border-style: none;
     display: inline-block;
     cursor: pointer;
+    text-decoration: none;
     @include breakpoints-up(medium) {
         padding: 1rem 1.75rem;
     }

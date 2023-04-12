@@ -71,6 +71,7 @@ h3 {
   border-style: none;
   display: inline-block;
   cursor: pointer;
+  text-decoration: none;
 }
 @media all and (min-width: 768px) {
   .payment-button {

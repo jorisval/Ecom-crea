@@ -1,8 +1,9 @@
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 import Logo from "../../assets/images/logo-ecom-crea.png";
+import ThankYouPopup from "../pages/Thank-you-newsletter";
 
 function Footer() {
-    const navigate = useNavigate();
+    const [showThankYouPopup, setShowThankYouPopup] = useState(false);
     async function handleSubmit(event) {
         event.preventDefault();
       
@@ -28,16 +29,23 @@ function Footer() {
             // Reset the form
             event.target.reset();
 
-            // Redirect to the home page
-            navigate("/");
+            // Show thank you popup
+            setShowThankYouPopup(true);
 
         } catch (error) {
             console.error("Error:", error);
         }
     }
 
+    const handleCloseThankYouPopup = () => {
+        setShowThankYouPopup(false);
+      };
+
     return (
         <div className="footer">
+            {showThankYouPopup && (
+                <ThankYouPopup onClose={handleCloseThankYouPopup} />
+            )}
             <div className="footer__part-1">
                 <div className="media">
                     <img src={Logo} alt=""/>

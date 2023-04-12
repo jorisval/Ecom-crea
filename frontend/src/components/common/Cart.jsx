@@ -1,4 +1,5 @@
 import { useEffect, useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { CartContext } from "../utils/context";
 
 function Cart() {
@@ -50,7 +51,12 @@ function Cart() {
         document.querySelector('.cart .background').addEventListener('click', function(e) {
             document.querySelector('.cart-content').classList.remove('show');
             document.querySelector('.cart .background').style.display = 'none';
-        });      
+        });
+        
+        document.querySelector('.cart .payment-button').addEventListener('click', function(e) {
+            document.querySelector('.cart-content').classList.remove('show');
+            document.querySelector('.cart .background').style.display = 'none';
+        });
     }, []);
 
 
@@ -166,7 +172,7 @@ function Cart() {
                     <span className="price">{subtotal}€</span>
                 </div>
                 <div className="cart-content-payment">
-                    <button className="payment-button"><span className="bi bi-credit-card"></span>Paiement sécurisé</button>
+                    <Link to='/checkout' className="payment-button"><span className="bi bi-credit-card"></span>Paiement sécurisé</Link>
                 </div>
             </div>
         </div>
