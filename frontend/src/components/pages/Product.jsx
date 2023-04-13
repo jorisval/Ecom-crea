@@ -16,21 +16,27 @@ function Product() {
     const { setOrderInfos, orderItem, setOrderItem} = useContext(CartContext);
     const [quantity, setQuantity] = useState(1);
     const [activeOption, setActiveOption] = useState(null);
-
+    const [showOptionWarning, setShowOptionWarning] = useState(false);
 
     useEffect(() => {
         if (data) {
             const addToCartButton = document.querySelector('.add-to-cart');
-            if (addToCartButton) {
+            if (addToCartButton && activeOption) {
                 addToCartButton.addEventListener('click', function (e) {
                 document.querySelector('.cart .background').style.display = 'block';
                 document.querySelector('.cart-content').classList.add('show');
                 });
             }
         }
-    }, [data])
+    }, [data, activeOption])
     
     const handleAddToCart = () => {
+        if (!activeOption) {
+            setShowOptionWarning(true);
+            return;
+        }
+        setShowOptionWarning(false);
+
         const updatedOrderItem = {...orderItem, quantity: quantity};
         setOrderItem(updatedOrderItem);
         
@@ -58,7 +64,15 @@ function Product() {
                             { data.options && data.options.map(option => {
                                 return(
                                     <div className="option">
-                                        <p>{option.name}</p>
+                                        <p>
+                                            {option.name} 
+                                            {showOptionWarning && (
+                                                <i
+                                                    className="bi bi-exclamation-triangle"
+                                                    style={{ color: "orange", marginLeft: "5px" }}
+                                                ></i>
+                                            )}
+                                        </p>
                                         <div className="option__case">
                                             {option.values && option.values.map((value, index) => {
                                                 return(
