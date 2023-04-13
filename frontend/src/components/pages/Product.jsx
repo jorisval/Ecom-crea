@@ -13,7 +13,7 @@ function Product() {
 
     const { productId } = useParams();
     const { data } = useFetch(`http://localhost:3000/api/catalog/${productId}`);
-    const { setOrderInfos, orderItem, setOrderItem} = useContext(CartContext);
+    const { orderInfos, setOrderInfos, orderItem, setOrderItem} = useContext(CartContext);
     const [quantity, setQuantity] = useState(1);
     const [activeOption, setActiveOption] = useState(null);
     const [showOptionWarning, setShowOptionWarning] = useState(false);
@@ -37,15 +37,40 @@ function Product() {
         }
         setShowOptionWarning(false);
 
-        const updatedOrderItem = {...orderItem, quantity: quantity};
-        setOrderItem(updatedOrderItem);
+        const existingItemIndex = orderInfos.orderItems.findIndex(
+            (item) => item.productId === data._id && item.option === activeOption
+        );
         
-        setOrderInfos(prevOrderInfos => {
-            return {
-                ...prevOrderInfos,
-                orderItems: [...prevOrderInfos.orderItems, updatedOrderItem]
+        // If Item exist with a valid index ([0, +00[)
+        if (existingItemIndex > -1) {
+            setOrderInfos((prevOrderInfos) => {
+                const updatedOrderItems = prevOrderInfos.orderItems.map((item, idx) => {
+                    if (idx === existingItemIndex) {
+                        return { ...item, quantity: item.quantity + quantity };
+                    }
+                    return item;
+                });
+    
+                return {
+                    ...prevOrderInfos,
+                    orderItems: updatedOrderItems,
+                };
+            });
+        } else {
+            const updatedOrderItem = {
+                ...orderItem,
+                quantity: quantity,
+                option: activeOption,
             };
-        });
+            setOrderItem(updatedOrderItem);
+    
+            setOrderInfos((prevOrderInfos) => {
+                return {
+                    ...prevOrderInfos,
+                    orderItems: [...prevOrderInfos.orderItems, updatedOrderItem],
+                };
+            });
+        }
     };
 
     return(

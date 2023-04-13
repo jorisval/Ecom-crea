@@ -108,12 +108,15 @@ function Cart() {
         });
     };
 
-    const removeItem = (index) => {
-        setOrderInfos(prevOrderInfos => {
-            const updatedOrderItems = prevOrderInfos.orderItems.filter((item, idx) => idx !== index);
+    const removeItem = (index, option) => {
+        setOrderInfos((prevOrderInfos) => {
+            // Remove the cart item only if both the index and the option match.
+            const updatedOrderItems = prevOrderInfos.orderItems.filter(
+                (item, idx) => idx !== index && item.option !== option
+            );
             return {
                 ...prevOrderInfos,
-                orderItems: updatedOrderItems
+                orderItems: updatedOrderItems,
             };
         });
     };
@@ -129,12 +132,19 @@ function Cart() {
                 <div>
                     {products && products.map((item, index) => {
                         const itemIndex = orderInfos.orderItems.findIndex(
-                            (product) => product.productId === item._id
+                            (product) => product.productId === item._id && product.option === (orderInfos.orderItems[index]?.option || '')
                         );
                         // Do not render the item if it doesn't exist in orderInfos.orderItems
                         if (itemIndex === -1) {
                             return null;
                         }
+                        // Check if the option matches
+                        const optionMatches = orderInfos.orderItems[itemIndex].option === orderInfos.orderItems[index].option;
+                        if (!optionMatches) {
+                            return null;
+                        }
+                         // Calculate the total price for each product in the cart
+                        const totalPrice = item.price * orderInfos.orderItems[itemIndex].quantity;
 
                         return(
                             <div className="cart-content-product" key={index}>
@@ -144,15 +154,10 @@ function Cart() {
                                 <div className="cart-content-product__part2">
                                     <div className="cart-content-product__part2-title">
                                         <span>{item.name}</span>
-                                        <span className="bi bi-x" onClick={() => removeItem(itemIndex)}></span>
+                                        <span className="bi bi-x" onClick={() => removeItem(itemIndex, orderInfos.orderItems[index].option)}></span>
                                     </div>
                                     <div className="cart-content-product__part2-option">
-                                        {orderInfos.orderItems.map((product) => {
-                                            if (product.productId === item._id) {
-                                                return <span>{product.option}</span>;
-                                            }
-                                            return null;
-                                        })}
+                                        <span>{orderInfos.orderItems[itemIndex].option}</span>
                                     </div>
                                     <div className="cart-content-product__part2-quantity">
                                         <div className="quantity">
@@ -160,7 +165,7 @@ function Cart() {
                                             <input type="number" id="quantity" value={orderInfos.orderItems[itemIndex].quantity} onChange={(e) => setQuantity(itemIndex, Number(e.target.value))} />
                                             <button className="quantity__button-up" onClick={() => upQuantity(itemIndex)}>+</button>
                                         </div>
-                                        <div className="price">{item.price}€</div>
+                                        <div className="price">{totalPrice}€</div>
                                     </div>
                                 </div>
                             </div>
