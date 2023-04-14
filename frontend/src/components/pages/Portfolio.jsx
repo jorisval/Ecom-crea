@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import PortfolioBoutique from "./Portfolio-boutique";
 import PortfolioVideo from "./Portfolio-video";
+import { PortfolioContainer } from "../styles/Portfolio";
 
 function Portfolio() {
     const { activePage, setActivePage } = useContext(HeaderContext);
@@ -12,7 +13,7 @@ function Portfolio() {
     },[activePage, setActivePage]);
 
     return(
-        <div className="portfolio-boutique">
+        <PortfolioContainer>
             <div className="pages-title">
                 <h1>Portfolio<span className="bi bi-chevron-double-right"></span></h1>
             </div>
@@ -33,7 +34,7 @@ function Portfolio() {
             <div className="portfolio-button">
                 <Link to='/catalog' className="cta-button">Je veux les mêmes</Link>
             </div>
-        </div>
+        </PortfolioContainer>
     );
 }
 

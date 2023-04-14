@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CatalogView from "../layout/catalog-view";
-import ProductStyled from "../styles/Product";
+import ProductContainer from "../styles/Product";
 import { CartContext, HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
 
@@ -74,7 +74,7 @@ function Product() {
     };
 
     return(
-        <ProductStyled>
+        <ProductContainer>
             {data && data.images ? (
                 <div className="contact">
                     <div className="product-hero">
@@ -136,7 +136,7 @@ function Product() {
             ) : (
                 <p>Loading...</p>
             )}
-        </ProductStyled>
+        </ProductContainer>
     );
 }
 

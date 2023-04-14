@@ -1,12 +1,13 @@
-// src/components/Checkout.js
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import styled from 'styled-components';
-import Payment from './Payment';
+import { CartContext } from '../utils/context/index';
+import { useNavigate } from 'react-router-dom';
 
-const CheckoutForm = styled.form`
+const CheckoutContainer = styled.div`
   display: flex;
   flex-direction: column;
-  width: 800px;
+  max-width: 800px;
+  width: 100%;
   margin: 0 auto;
   padding: 20px;
   border: 1px solid #ccc;
@@ -14,36 +15,72 @@ const CheckoutForm = styled.form`
   background-color: #f5f5f5;
 `;
 
-const SectionTitle = styled.h3`
+const FormTitle = styled.h3`
   margin-bottom: 10px;
 `;
 
-const InputLabel = styled.label`
-  margin-bottom: 5px;
+const FormGroup = styled.div`
+  margin-bottom: 20px;
+
+  @media (max-width: 767px) {
+    margin-bottom: 10px;
+  }
 `;
 
-const Input = styled.input`
+const FormRow = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
+  @media (max-width: 767px) {
+    flex-direction: column;
+  }
+`;
+
+const FormSection = styled.div`
+  margin-bottom: 30px;
+`;
+
+const StyledLabel = styled.label`
+  margin-bottom: 5px;
+  display: block;
+`;
+
+const StyledInput = styled.input`
   margin-bottom: 20px;
   padding: 5px;
   border: 1px solid #ccc;
   border-radius: 5px;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 48%;
+  }
 `;
 
-const AddressFields = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+
+const CardDetails = styled.div`
+  margin-bottom: 20px;
 `;
 
-const HalfWidthInput = styled(Input)`
-  width: 48%;
+
+const StyledSelect = styled.select`
+  margin-bottom: 20px;
+  padding: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 100%;
+
+  @media (min-width: 768px) {
+    width: 48%;
+  }
 `;
 
-const SubmitButton = styled.button`
+const StyledButton = styled.button`
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
   font-weight: bold;
   cursor: pointer;
@@ -52,178 +89,172 @@ const SubmitButton = styled.button`
   }
 `;
 
-const Checkout = ({ order }) => {
-    const [email, setEmail] = useState('');
-    const [name, setName] = useState('');
-    const [shippingAddress, setShippingAddress] = useState({
-        street: '',
-        city: '',
-        state: '',
-        country: '',
-        zipCode: '',
-    });
-    const [billingAddress, setBillingAddress] = useState({
-        street: '',
-        city: '',
-        state: '',
-        country: '',
-        zipCode: '',
-    });
+const Checkout = () => {
+    const { orderInfos, setOrderInfos } = useContext(CartContext);
+    const [paymentMethod, setPaymentMethod] = useState('card');
+    const [billingAddressOption, setBillingAddressOption] = useState('same');
+    const navigate = useNavigate();
 
-    const handleInputChange = (setStateFn) => (e) => {
-        setStateFn(e.target.value);
+    const setCustomerInfo = (field, value) => {
+        setOrderInfos({
+        ...orderInfos,
+        [field]: value,
+        });
     };
 
-    const handleAddressChange = (addressType, field) => (e) => {
-        const newAddress = { ...addressType };
-        newAddress[field] = e.target.value;
-        if (addressType === shippingAddress) {
-        setShippingAddress(newAddress);
-        } else {
-        setBillingAddress(newAddress);
-        }
+    const setAddressInfo = (type, field, value) => {
+        setOrderInfos({
+        ...orderInfos,
+        [type]: { ...orderInfos[type], [field]: value },
+        });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
-        // Update contact information, shipping address, and billing address in your backend
-        // You should implement the `updateCheckoutInfo` function
-        //await updateCheckoutInfo(order._id, email, name, shippingAddress, billingAddress);
+        // Process the form data and make API calls as needed
+        navigate('/thank-you');
     };
+
+    const addressFields = (type) => (
+        <FormRow>
+        <FormGroup>
+            <StyledLabel htmlFor={`${type}Street`}>Street</StyledLabel>
+            <StyledInput
+            type="text"
+            id={`${type}Street`}
+            value={orderInfos[type].street}
+            onChange={(e) => setAddressInfo(type, 'street', e.target.value)}
+            />
+        </FormGroup>
+        <FormGroup>
+            <StyledLabel htmlFor={`${type}City`}>City</StyledLabel>
+            <StyledInput
+            type="text"
+            id={`${type}City`}
+            value={orderInfos[type].city}
+            onChange={(e) => setAddressInfo(type, 'city', e.target.value)}
+            />
+        </FormGroup>
+        <FormGroup>
+            <StyledLabel htmlFor={`${type}State`}>State</StyledLabel>
+            <StyledInput
+            type="text"
+            id={`${type}State`}
+            value={orderInfos[type].state}
+            onChange={(e) => setAddressInfo(type, 'state', e.target.value)}
+            />
+        </FormGroup>
+        <FormGroup>
+            <StyledLabel htmlFor={`${type}Zip`}>ZIP Code</StyledLabel>
+            <StyledInput
+            type="text"
+            id={`${type}Zip`}
+            value={orderInfos[type].zipCode}
+            onChange={(e) => setAddressInfo(type, 'zipCode', e.target.value)}
+            />
+        </FormGroup>
+        <FormGroup>
+            <StyledLabel htmlFor={`${type}Country`}>Country</StyledLabel>
+            <StyledInput
+            type="text"
+            id={`${type}Country`}
+            value={orderInfos[type].country}
+            onChange={(e) => setAddressInfo(type, 'country', e.target.value)}
+            />
+        </FormGroup>
+        </FormRow>
+    );
+
+    const cardDetails = () => (
+        <CardDetails>
+        <FormRow>
+            <FormGroup>
+                <StyledLabel htmlFor="cardNumber">Card Number</StyledLabel>
+                <StyledInput type="text" id="cardNumber" />
+            </FormGroup>
+            <FormGroup>
+                <StyledLabel htmlFor="expirationDate">Expiration Date</StyledLabel>
+                <StyledInput type="text" id="expirationDate" />
+            </FormGroup>
+            <FormGroup>
+                <StyledLabel htmlFor="securityCode">Security Code</StyledLabel>
+                <StyledInput type="text" id="securityCode" />
+            </FormGroup>
+        </FormRow>
+        </CardDetails>
+    );
 
     return (
-        <>
-        <CheckoutForm onSubmit={handleSubmit}>
-            <SectionTitle>Contact Information</SectionTitle>
-            <InputLabel htmlFor="email">Email</InputLabel>
-            <Input
-            id="email"
-            type="email"
-            value={email}
-            onChange={handleInputChange(setEmail)}
-            required
-            />
-            <InputLabel htmlFor="name">Name</InputLabel>
-            <Input
-            id="name"
-            type="text"
-            value={name}
-            onChange={handleInputChange(setName)}
-            required
-            />
-
-            <SectionTitle>Shipping Address</SectionTitle>
-            <AddressFields>
-            <div>
-                <InputLabel htmlFor="shippingStreet">Street</InputLabel>
-                <HalfWidthInput
-                id="shippingStreet"
-                type="text"
-                value={shippingAddress.street}
-                onChange={handleAddressChange(shippingAddress, 'street')}
-                required
-            />
-            </div>
-            <div>
-            <InputLabel htmlFor="shippingCity">City</InputLabel>
-            <HalfWidthInput
-                id="shippingCity"
-                type="text"
-                value={shippingAddress.city}
-                onChange={handleAddressChange(shippingAddress, 'city')}
-                required
-            />
-            </div>
-        </AddressFields>
-        <InputLabel htmlFor="shippingState">State</InputLabel>
-        <Input
-            id="shippingState"
-            type="text"
-            value={shippingAddress.state}
-            onChange={handleAddressChange(shippingAddress, 'state')}
-            required
-        />
-        <AddressFields>
-            <div>
-            <InputLabel htmlFor="shippingCountry">Country</InputLabel>
-            <HalfWidthInput
-                id="shippingCountry"
-                type="text"
-                value={shippingAddress.country}
-                onChange={handleAddressChange(shippingAddress, 'country')}
-                required
-            />
-            </div>
-            <div>
-            <InputLabel htmlFor="shippingZipCode">Zip Code</InputLabel>
-            <HalfWidthInput
-                id="shippingZipCode"
-                type="text"
-                value={shippingAddress.zipCode}
-                onChange={handleAddressChange(shippingAddress, 'zipCode')}
-                required
-            />
-            </div>
-        </AddressFields>
-
-        <SectionTitle>Billing Address</SectionTitle>
-        <AddressFields>
-            <div>
-            <InputLabel htmlFor="billingStreet">Street</InputLabel>
-            <HalfWidthInput
-                id="billingStreet"
-                type="text"
-                value={billingAddress.street}
-                onChange={handleAddressChange(billingAddress, 'street')}
-                required
-            />
-            </div>
-            <div>
-            <InputLabel htmlFor="billingCity">City</InputLabel>
-            <HalfWidthInput
-                id="billingCity"
-                type="text"
-                value={billingAddress.city}
-                onChange={handleAddressChange(billingAddress, 'city')}
-                required
-            />
-            </div>
-        </AddressFields>
-        <InputLabel htmlFor="billingState">State</InputLabel>
-        <Input
-            id="billingState"
-            type="text"
-            value={billingAddress.state}
-            onChange={handleAddressChange(billingAddress, 'state')}
-            required
-        />
-        <AddressFields>
-            <div>
-            <InputLabel htmlFor="billingCountry">Country</InputLabel>
-            <HalfWidthInput
-                id="billingCountry"
-                type="text"
-                value={billingAddress.country}
-                onChange={handleAddressChange(billingAddress, 'country')}
-                required
-            />
-            </div>
-            <div>
-            <InputLabel htmlFor="billingZipCode">Zip Code</InputLabel>
-            <HalfWidthInput
-                id="billingZipCode"
-                type="text"
-                value={billingAddress.zipCode}
-                onChange={handleAddressChange(billingAddress, 'zipCode')}
-                required
-            />
-            </div>
-        </AddressFields>
-        <SubmitButton type="submit">Save Information</SubmitButton>
-        </CheckoutForm>
-        <Payment order={order} />
-    </>
+        <CheckoutContainer>
+            <form onSubmit={handleSubmit}>
+                <FormSection>
+                <FormTitle>Contact Information</FormTitle>
+                <FormRow>
+                    <FormGroup>
+                    <StyledLabel htmlFor="name">Name</StyledLabel>
+                    <StyledInput
+                        type="text"
+                        id="name"
+                        value={orderInfos.name}
+                        onChange={(e) => setCustomerInfo('name', e.target.value)}
+                    />
+                    </FormGroup>
+                    <FormGroup>
+                    <StyledLabel htmlFor="email">Email</StyledLabel>
+                    <StyledInput
+                        type="email"
+                        id="email"
+                        value={orderInfos.email}
+                        onChange={(e) => setCustomerInfo('email', e.target.value)}
+                    />
+                    </FormGroup>
+                </FormRow>
+                </FormSection>
+                <FormSection>
+                <FormTitle>Shipping Address</FormTitle>
+                {addressFields('shippingAddress')}
+                </FormSection>
+                <FormSection>
+                <FormTitle>Billing Address</FormTitle>
+                <FormRow>
+                    <FormGroup>
+                    <StyledLabel htmlFor="billingAddressOption">Billing Address</StyledLabel>
+                    <StyledSelect
+                        id="billingAddressOption"
+                        value={billingAddressOption}
+                        onChange={(e) => setBillingAddressOption(e.target.value)}
+                    >
+                        <option value="same">Same as shipping address</option>
+                        <option value="different">Use a different billing address</option>
+                    </StyledSelect>
+                    </FormGroup>
+                </FormRow>
+                {billingAddressOption === 'different' && addressFields('billingAddress')}
+                </FormSection>
+                <FormSection>
+                <FormTitle>Payment Method</FormTitle>
+                <FormRow>
+                    <FormGroup>
+                    <StyledLabel htmlFor="paymentMethod">Payment Method</StyledLabel>
+                    <StyledSelect
+                        id="paymentMethod"
+                        value={paymentMethod}
+                        onChange={(e) => setPaymentMethod(e.target.value)}
+                    >
+                        <option value="card">Credit Card</option>
+                        <option value="paypal">PayPal</option>
+                    </StyledSelect>
+                    </FormGroup>
+                </FormRow>
+                {paymentMethod === 'card' && cardDetails()}
+                </FormSection>
+                <FormSection>
+                <StyledButton type="submit">Place Order</StyledButton>
+                </FormSection>
+            </form>
+            </CheckoutContainer>
     );
+      
 };
 
 export default Checkout;

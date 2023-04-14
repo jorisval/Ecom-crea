@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import theme from '../utils/Variables';
 
-const ProductStyled = styled.div`
+const ProductContainer = styled.div`
     .product-hero {
         padding: ${theme.layout.spaceBetween30} ${theme.layout.marginLeftRight};
         margin: 0 -0.5rem;
@@ -189,5 +189,4 @@ const ProductStyled = styled.div`
     }
 `;
     
-export default ProductStyled;
-    
+export default ProductContainer;

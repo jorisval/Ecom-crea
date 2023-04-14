@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useFetch } from "../utils/hooks";
+import { CatalogViewContainer } from "../styles/Catalog-view";
 function CatalogView() {
     const { data } = useFetch('http://localhost:3000/api/catalog');
     const [catalogViewData, setCatalogViewData] = useState([]);
@@ -11,7 +12,7 @@ function CatalogView() {
         }
     }, [data]);
     return (
-        <div className="services-section">
+        <CatalogViewContainer className="services-section">
             <div className="services">
                 {catalogViewData.map((product, index) => {
                     return(
@@ -26,7 +27,7 @@ function CatalogView() {
                 })}
             </div>
             <Link to='/catalog' className="cta-button">Voir catalogue</Link>
-        </div>
+        </CatalogViewContainer>
     );
 }
 

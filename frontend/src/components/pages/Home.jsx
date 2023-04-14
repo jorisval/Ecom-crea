@@ -11,6 +11,7 @@ import IconPrice from "../../assets/images/icone-price.png";
 import IconSatisfaction from "../../assets/images/icone-satisfaction.png";
 import { useFetch } from "../utils/hooks";
 import { Link } from "react-router-dom";
+import { HomeContainer } from "../styles/Home";
 
 
 function Home() {
@@ -21,7 +22,7 @@ function Home() {
     const { data } = useFetch('http://localhost:3000/api/client-result');
     
     return(
-        <div className="home">
+        <HomeContainer className="home">
             <div className="hero">
                 <div className="hero__text">
                     <h1>L'équipe secrète derrière les e-commerçants qui se détentent et chiffrent sans stress</h1>
@@ -111,7 +112,7 @@ function Home() {
                     </div>
                 </div>
             </div>
-        </div>
+        </HomeContainer>
     )
 }
 

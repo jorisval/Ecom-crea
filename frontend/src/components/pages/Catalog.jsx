@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
+import { CatalogContainer } from "../styles/Catalog";
 
 function Catalog() {
     const { setActivePage } = useContext(HeaderContext);
@@ -29,7 +30,7 @@ function Catalog() {
     }*/
 
     return(
-        <div className="catalog">
+        <CatalogContainer className="catalog">
             <div className="pages-title">
             <h1>Catalogue<span className="bi bi-chevron-double-right"></span></h1>
         </div>
@@ -51,7 +52,7 @@ function Catalog() {
                 <button className="cta-button" onClick={handleClick}>Voir plus</button>
             )}
         </div>
-        </div>
+        </CatalogContainer>
     );
 }
 

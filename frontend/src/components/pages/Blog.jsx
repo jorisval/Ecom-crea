@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
+import { BlogContainer } from "../styles/Blog";
 
 function Blog() {
     const { setActivePage } = useContext(HeaderContext);
@@ -42,7 +43,7 @@ function Blog() {
     }
 
     return(
-        <div className="Blog">
+        <BlogContainer className="Blog">
             <div className="blog-title">
             <h1>Blog</h1>
         </div>
@@ -70,7 +71,7 @@ function Blog() {
             <button className="previous" onClick={() => previousButton()}>Previous</button>
             <button className="next" onClick={() => nextButton()}>Next</button>
         </div>
-        </div>
+        </BlogContainer>
     );
 }
 

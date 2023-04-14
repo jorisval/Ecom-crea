@@ -2,6 +2,7 @@ import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
+import { PostContainer } from "../styles/Artice";
 
 function Article() {
     const { setActivePage } = useContext(HeaderContext);
@@ -24,19 +25,23 @@ function Article() {
 
     }
 
+    async function handleSubmit(event) {
+        event.preventDefault();
+    }
+
     return(
-        <div className="article-content">
+        <PostContainer className="article-content">
             <h1>{ data.title }</h1>
             <span className="date">{ formatedDate(data.dateCreated) }</span>
             <img src={data.imageUrl} alt=""/>
             <div className="description">
                 {data.content}
             </div>
-            <form method="post" action="">
+            <form onSubmit={handleSubmit}>
                 <div><textarea name="comment" id="comment" rows="6" placeholder="Comment..."></textarea></div>
                 <div><input type="submit" value="Send"/></div>
             </form>
-        </div>
+        </PostContainer>
     );
 }
 

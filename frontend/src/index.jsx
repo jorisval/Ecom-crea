@@ -13,10 +13,12 @@ import Portfolio from './components/pages/Portfolio';
 import PortfolioBoutique from './components/pages/Portfolio-boutique';
 import PortfolioVideo from './components/pages/Portfolio-video';
 import Product from './components/pages/Product';
-import StyledHeader from './components/styles/Header';
 import { CartProvider, HeaderProvider } from './components/utils/context';
 import Checkout from './components/pages/Checkout';
 import ThankYou from './components/pages/Thank-you';
+import StyledBase from './components/styles/base';
+import StyledLayouts from './components/styles/Layouts';
+import StyledComponents from './components/styles/Components';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -24,7 +26,9 @@ root.render(
     <Router>
       <HeaderProvider>
         <CartProvider>
-          <StyledHeader />
+          <StyledBase />
+          <StyledLayouts />
+          <StyledComponents />
           <Header />
           <Routes>
             <Route path='/' element={<Home />}/>
