@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
-import { CatalogContainer } from "../styles/Catalog";
+import { CatalogContainer, SkeletonLoader } from "../styles/Catalog";
 
 function Catalog() {
     const { setActivePage } = useContext(HeaderContext);
     useEffect(() => {
         setActivePage("catalog");
     }, [setActivePage]);
-    const { data } = useFetch('http://localhost:3000/api/catalog');
+    const { data, dataIsLoading } = useFetch('http://localhost:3000/api/catalog');
     const[showCount, setShowCount] = useState(8);
     const handleClick = () => {
         setShowCount(showCount + 8);
@@ -36,17 +36,21 @@ function Catalog() {
         </div>
         <div className="services-section catalog-services">
             <div className="services">
-                { Array.isArray(data) && data.slice(0, showCount).map((product) => {
-                    return(
-                        <div className="service" key={product._id}>
+                {dataIsLoading
+                    ? Array.from({ length: showCount }).map((_, i) => <SkeletonLoader key={i} />)
+                    : Array.isArray(data) &&
+                        data.slice(0, showCount).map((product) => {
+                        return (
+                            <div className="service" key={product._id}>
                             <Link to={`/product/${product._id}`}>
-                                <img src={product.images[0]} alt=""/>
+                                <img src={product.images[0]} alt="" />
                                 <p>{product.name}</p>
                                 <span>{product.price}€</span>
                             </Link>
-                        </div>
-                    )
-                }) }
+                            </div>
+                        );
+                    })
+                }
             </div>
             {showCount < data?.length && (
                 <button className="cta-button" onClick={handleClick}>Voir plus</button>

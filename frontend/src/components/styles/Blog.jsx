@@ -1,7 +1,48 @@
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import theme from '../utils/Variables';
 
+const shimmer = keyframes`
+    0% {
+        background-position: -468px 0;
+    }
+    100% {
+        background-position: 468px 0;
+    }
+`;
+
+export const SkeletonLoader = styled.div`
+    width: 14.375rem;
+    height: 23.6075rem;
+    border-radius: 0.625rem;
+    background-color: #f0f0f0;
+    background-image: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    background-repeat: no-repeat;
+    animation: ${shimmer} 1.5s infinite;
+    padding-bottom: 0.9375rem;
+    margin-bottom: 2.1875rem;
+    @media (max-width: ${theme.breakpoints.down.small}) {
+        margin: auto;
+        margin-bottom: 2.1875rem;
+    }
+    @media (min-width: ${theme.breakpoints.up.medium}) {
+        width: 20rem;
+        height: 28.37rem;
+        padding-bottom: 1.875rem;
+    }
+`;
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 export const BlogContainer = styled.div`
+    animation: ${fadeIn} 1s ease-in;
     .blog-title {
         padding: ${theme.layout.spaceBetween90} ${theme.layout.marginLeftRight};
         padding-bottom: ${theme.layout.spaceBetween30};

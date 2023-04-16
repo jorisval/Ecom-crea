@@ -1,7 +1,17 @@
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import theme from '../utils/Variables';
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 const ProductContainer = styled.div`
+    animation: ${fadeIn} 1s ease-in;
     .product-hero {
         padding: ${theme.layout.spaceBetween30} ${theme.layout.marginLeftRight};
         margin: 0 -0.5rem;

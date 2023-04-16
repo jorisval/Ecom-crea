@@ -1,7 +1,17 @@
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import theme from '../utils/Variables';
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 export const FaqContainer = styled.div`
+    animation: ${fadeIn} 1s ease-in;
     color: ${theme.colors.paragraph};
     font-size: 0.9375rem;
     line-height: 1.375rem;

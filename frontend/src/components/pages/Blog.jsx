@@ -2,14 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
-import { BlogContainer } from "../styles/Blog";
+import { BlogContainer, SkeletonLoader } from "../styles/Blog";
 
 function Blog() {
     const { setActivePage } = useContext(HeaderContext);
     useEffect(() => {
         setActivePage("blog");
     }, [setActivePage]);
-    const { data } = useFetch('http://localhost:3000/api/post');
+    const { data, dataIsLoading } = useFetch('http://localhost:3000/api/post');
     const [currentPage, setCurrentPage] = useState(1);
     const [perPage] = useState(8);
     const indexOfLastPost = currentPage * perPage;
@@ -48,7 +48,9 @@ function Blog() {
             <h1>Blog</h1>
         </div>
         <div className="articles">
-            { Array.isArray(currentPosts) && currentPosts.map((post) => {
+            { dataIsLoading
+                    ? Array.from({ length: perPage }).map((_, i) => <SkeletonLoader key={i} />)
+                    : Array.isArray(currentPosts) && currentPosts.map((post) => {
                 return(
                     <div className="article" key={post._id}>
                         <Link to={`/article/${post._id}`}>

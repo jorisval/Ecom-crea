@@ -1,7 +1,17 @@
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import theme from '../utils/Variables';
 
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 export const PortfolioContainer = styled.div`
+    animation: ${fadeIn} 1s ease-in;
     margin: 0 10%;
     margin-bottom: ${theme.layout.spaceBetween20};
     @media (min-width: ${theme.breakpoints.up.medium}) {

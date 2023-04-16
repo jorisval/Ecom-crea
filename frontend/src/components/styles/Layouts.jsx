@@ -1,7 +1,18 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle, keyframes } from 'styled-components';
 import theme from '../utils/Variables';
+
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+`;
+
 const LayoutsStyle = createGlobalStyle`
     .header {
+        animation: ${fadeIn} 1s ease-in;
         display: flex;
         position: relative;
         justify-content: space-between;
@@ -343,6 +354,7 @@ const LayoutsStyle = createGlobalStyle`
     
     
     .footer {
+        animation: ${fadeIn} 1s ease-in;
         padding: 0 ${theme.layout.marginLeftRight};
         padding-top: ${theme.layout.spaceBetween30};
         padding-bottom: 1.25rem;
