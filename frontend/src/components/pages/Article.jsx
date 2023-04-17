@@ -2,7 +2,7 @@ import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
-import { PostContainer } from "../styles/Artice";
+import { PostContainer, LoaderContainer } from "../styles/Artice";
 
 function Article() {
     const { setActivePage } = useContext(HeaderContext);
@@ -10,7 +10,7 @@ function Article() {
         setActivePage("blog");
     }, [setActivePage]);
     const { articleId } = useParams();
-    const { data } = useFetch(`http://localhost:3000/api/post/${articleId}`);
+    const { data, dataIsLoading } = useFetch(`http://localhost:3000/api/post/${articleId}`);
     const formatedDate = (isoDate) => {
         // Create a new Date object from the ISO date string
         const date = new Date(isoDate);
@@ -30,18 +30,27 @@ function Article() {
     }
 
     return(
-        <PostContainer className="article-content">
-            <h1>{ data.title }</h1>
-            <span className="date">{ formatedDate(data.dateCreated) }</span>
-            <img src={data.imageUrl} alt=""/>
-            <div className="description">
-                {data.content}
-            </div>
-            <form onSubmit={handleSubmit}>
-                <div><textarea name="comment" id="comment" rows="6" placeholder="Comment..."></textarea></div>
-                <div><input type="submit" value="Send"/></div>
-            </form>
-        </PostContainer>
+        <>
+            {dataIsLoading && (
+            <LoaderContainer>
+                <div className="bounce bounce1"></div>
+                <div className="bounce bounce2"></div>
+                <div className="bounce"></div>
+            </LoaderContainer>
+            )}
+            <PostContainer className="article-content">
+                <h1>{ data.title }</h1>
+                <span className="date">{ formatedDate(data.dateCreated) }</span>
+                <img src={data.imageUrl} alt=""/>
+                <div className="description">
+                    {data.content}
+                </div>
+                <form onSubmit={handleSubmit}>
+                    <div><textarea name="comment" id="comment" rows="6" placeholder="Comment..."></textarea></div>
+                    <div><input type="submit" value="Send"/></div>
+                </form>
+            </PostContainer>
+        </>
     );
 }
 

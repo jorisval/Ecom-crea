@@ -1,4 +1,4 @@
-import styled, {keyframes} from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import theme from '../utils/Variables';
 
 const fadeIn = keyframes`
@@ -10,8 +10,8 @@ const fadeIn = keyframes`
   }
 `;
 
-const ProductContainer = styled.div`
-    animation: ${fadeIn} 1s ease-in;
+export const ProductContainer = styled.div`
+    animation: ${fadeIn} 0.4s ease-in;
     .product-hero {
         padding: ${theme.layout.spaceBetween30} ${theme.layout.marginLeftRight};
         margin: 0 -0.5rem;
@@ -198,5 +198,97 @@ const ProductContainer = styled.div`
         }
     }
 `;
-    
-export default ProductContainer;
+
+const shimmer = keyframes`
+    0% {
+        background-position: -40rem 0;
+    }
+    100% {
+        background-position: 40rem 0;
+    }
+`;
+
+const skeletonBackground = css`
+    background-image: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 40rem 100%;
+    animation: ${shimmer} 2s infinite;
+`;
+
+export const SkeletonImage = styled.div`
+    width: 277px;
+    height: 277px;
+    border-radius: 0.625rem;
+    ${skeletonBackground}
+    @media (min-width: 320px) {
+        width: 330px;
+        height: 330px;
+    }
+    @media (min-width: 425px) {
+        width: 378px;
+        height: 378px;
+    }
+    @media (min-width: 768px) {
+        width: 480px;
+        height: 480px;
+    }
+`;
+
+export const SkeletonText = styled.div`
+    height: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 3px;
+    ${skeletonBackground}
+`;
+
+export const SkeletonButton = styled.div`
+    width: 100%;
+    height: 2rem;
+    margin-bottom: 0.5rem;
+    border-radius: 3px;
+    ${skeletonBackground}
+`;
+
+export const SkeletonOption = styled.div`
+    width: 100%;
+    height: 1rem;
+    margin-left: 0.625rem;
+    margin-bottom: 0.375rem;
+    border-radius: 3px;
+    ${skeletonBackground}
+`;
+
+export const SkeletonQuantity = styled.div`
+    display: flex;
+    align-items: center;
+
+    & > div {
+        height: 1.5rem;
+        border-radius: 3px;
+        ${skeletonBackground}
+
+        &:first-child {
+            width: 2.5rem;
+            margin-right: 0.625rem;
+        }
+
+        &:nth-child(2) {
+            width: 1rem;
+            margin-right: 0.625rem;
+        }
+
+        &:last-child {
+            width: 2.5rem;
+        }
+    }
+`;
+
+export const SkeletonProductBody = styled.div`
+    margin-bottom: 1.5rem;
+
+    & > div {
+        height: 1rem;
+        margin-bottom: 0.5rem;
+        border-radius: 3px;
+        ${skeletonBackground}
+    }
+`;

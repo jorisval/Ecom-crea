@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import CatalogView from "../layout/catalog-view";
-import ProductContainer from "../styles/Product";
+import { ProductContainer, SkeletonImage, SkeletonText, SkeletonOption, SkeletonQuantity, SkeletonProductBody } from "../styles/Product";
 import { CartContext, HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
 
@@ -12,7 +12,7 @@ function Product() {
     }, [setActivePage]);
 
     const { productId } = useParams();
-    const { data } = useFetch(`http://localhost:3000/api/catalog/${productId}`);
+    const { data, dataIsLoading } = useFetch(`http://localhost:3000/api/catalog/${productId}`);
     const { orderInfos, setOrderInfos, orderItem, setOrderItem} = useContext(CartContext);
     const [quantity, setQuantity] = useState(1);
     const [activeOption, setActiveOption] = useState(null);
@@ -75,11 +75,34 @@ function Product() {
 
     return(
         <ProductContainer>
-            {data && data.images ? (
-                <div className="contact">
+            {
+                dataIsLoading ? (
+                    <>
                     <div className="product-hero">
                         <div className="product-hero__part-1">
-                            <img src={data.images[0]} alt=""/>
+                            <SkeletonImage />
+                        </div>
+                        <div className="product-hero__part-2">
+                            <SkeletonText style={{ width: '50%', marginTop: '1rem' }} />
+                            <SkeletonText style={{ width: '100%' }} />
+                            <SkeletonText style={{ width: '100%' }} />
+                            <SkeletonText style={{ width: '100%' }} />
+                            <SkeletonText style={{ width: '100%', marginBottom: '1rem' }} />
+                            <SkeletonQuantity>
+                                <div />
+                                <div />
+                                <div />
+                            </SkeletonQuantity>
+                            <SkeletonOption style={{ width: '30%' }} />
+                            <SkeletonOption style={{ width: '30%' }} />
+                            <SkeletonOption style={{ width: '30%' }} />
+                        </div>
+                    </div>
+                    </>
+                ) : (
+                    <div className="product-hero">
+                        <div className="product-hero__part-1">
+                            <img src={data.images && data.images.length > 0 && data.images[0]} alt=""/>
                         </div>
                         <div className="product-hero__part-2">
                             <div className="product-title">
@@ -124,18 +147,32 @@ function Product() {
                             <button className="add-to-cart" onClick={() => handleAddToCart()}>+ Ajouter au panier</button>
                         </div>
                     </div>
+                )
+            }
+
+            {
+                dataIsLoading ? (
                     <div className="product-body">
-                        {data.description}
+                        <SkeletonProductBody>
+                            <div style={{ width: '100%' }} />
+                            <div style={{ width: '80%' }} />
+                            <div style={{ width: '90%' }} />
+                            <div style={{ width: '100%' }} />
+                        </SkeletonProductBody>
                     </div>
-                    <div className="product-catalog-view">
-                        <div className="solid"></div>
-                        <h3>Découvrir d'autres services</h3>
-                        <CatalogView />
-                    </div>
-                </div>
-            ) : (
-                <p>Loading...</p>
-            )}
+                ) : (
+                    <>
+                        <div className="product-body">
+                            {data.description}
+                        </div>
+                        <div className="product-catalog-view">
+                            <div className="solid"></div>
+                            <h3>Découvrir d'autres services</h3>
+                            <CatalogView />
+                        </div>
+                    </>
+                )
+            }
         </ProductContainer>
     );
 }

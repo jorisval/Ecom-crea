@@ -1,6 +1,48 @@
 import styled, {keyframes} from 'styled-components';
 import theme from '../utils/Variables';
 
+const bounce = keyframes`
+  0%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+`;
+
+export const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.8);
+
+  .bounce {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: ${theme.colors.button};
+    border-radius: 100%;
+    animation: ${bounce} 1.2s infinite ease-in-out;
+  }
+
+  .bounce1 {
+    animation-delay: -0.32s;
+  }
+
+  .bounce2 {
+    animation-delay: -0.16s;
+  }
+`;
+
 const fadeIn = keyframes`
   0% {
     opacity: 0;
