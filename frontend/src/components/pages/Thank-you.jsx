@@ -1,32 +1,48 @@
-// src/components/ThankYou.js
-import React from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
+import theme from '../utils/Variables';
+import { CartContext } from '../utils/context';
 
 const ThankYouContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 800px;
-  margin: 0 auto;
+  margin: auto;
+  margin-top: ${theme.layout.spaceBetween30};
+  margin-bottom: ${theme.layout.spaceBetween30};
+  width: 80%;
   padding: 20px;
+
+  @media (min-width: ${theme.breakpoints.up.medium}) {
+      width: 50%;
+  }
 `;
 
 const ThankYouTitle = styled.h2`
-  font-size: 36px;
-  font-weight: bold;
-  margin-bottom: 20px;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: ${theme.colors.titleH1};
+  margin-bottom: ${theme.layout.spaceBetween20};
+
+  @media (min-width: ${theme.breakpoints.up.medium}) {
+      font-size: 1.75rem;
+  }
 `;
 
 const ThankYouSubtitle = styled.h4`
-  font-size: 24px;
+  font-size: 1.125rem;
   font-weight: normal;
-  margin-bottom: 10px;
+  argin-bottom: ${theme.layout.spaceBetween10};
+
+  @media (min-width: ${theme.breakpoints.up.medium}) {
+      font-size: 1.5rem;
+  }
 `;
 
 const OrderSummary = styled.div`
   width: 100%;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: ${theme.layout.spaceBetween20};;
+  margin-bottom: ${theme.layout.spaceBetween20};
   border: 1px solid #ccc;
   border-radius: 10px;
   background-color: #f5f5f5;
@@ -38,10 +54,12 @@ const OrderDetails = styled.div`
 `;
 
 const OrderDetail = styled.div`
-  font-size: 16px;
+  font-size: 1rem;
 `;
 
-const ThankYou = ({ order }) => {
+const ThankYou = () => {
+  const { orderInfos } = useContext(CartContext);
+
   return (
     <ThankYouContainer>
       <ThankYouTitle>Thank you for your order!</ThankYouTitle>
@@ -52,8 +70,8 @@ const ThankYou = ({ order }) => {
           <OrderDetail>Date: {/*{new Date(order.createdAt).toLocaleDateString()}*/}</OrderDetail>
         </OrderDetails>
         <OrderDetails>
-          <OrderDetail>Total Items: {/*{order.orderItems.length}*/}</OrderDetail>
-          <OrderDetail>Total Amount: ${/*{order.totalAmount.toFixed(2)}*/}</OrderDetail>
+          <OrderDetail>Total Items: {orderInfos.orderItems.length}</OrderDetail>
+          <OrderDetail>Total Amount: ${orderInfos.totalAmount}</OrderDetail>
         </OrderDetails>
       </OrderSummary>
       <p>Your order has been placed and will be shipped to you soon!</p>
