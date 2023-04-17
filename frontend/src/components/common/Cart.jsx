@@ -21,7 +21,13 @@ function Cart() {
         newSubtotal = newSubtotal + item.price * item.quantity;
         });
         setSubtotal(newSubtotal);
-    }, [orderInfos.orderItems]);
+        setOrderInfos(prevOrderInfos => {
+            return {
+                ...prevOrderInfos,
+                totalAmount: newSubtotal,
+            }
+        })
+    }, [orderInfos.orderItems, setOrderInfos]);
 
     useEffect(() => {
         if (productIds.length > 0) {
