@@ -1,93 +1,21 @@
 import React, { useState, useContext } from 'react';
-import styled from 'styled-components';
+import {
+  CheckoutContainer,
+  FormTitle,
+  FormGroup,
+  FormRow,
+  FormSection,
+  StyledLabel,
+  StyledInput,
+  CardDetails,
+  StyledButton,
+  StyledRadioWrapper,
+  StyledRadioLabel,
+  StyledRadioInput,
+  FormSeparator,
+} from '../styles/Checkout';
 import { CartContext } from '../utils/context/index';
 import { useNavigate } from 'react-router-dom';
-
-const CheckoutContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  max-width: 800px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background-color: #f5f5f5;
-`;
-
-const FormTitle = styled.h3`
-  margin-bottom: 10px;
-`;
-
-const FormGroup = styled.div`
-  margin-bottom: 20px;
-
-  @media (max-width: 767px) {
-    margin-bottom: 10px;
-  }
-`;
-
-const FormRow = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-
-  @media (max-width: 767px) {
-    flex-direction: column;
-  }
-`;
-
-const FormSection = styled.div`
-  margin-bottom: 30px;
-`;
-
-const StyledLabel = styled.label`
-  margin-bottom: 5px;
-  display: block;
-`;
-
-const StyledInput = styled.input`
-  margin-bottom: 20px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-
-  @media (min-width: 768px) {
-    width: 48%;
-  }
-`;
-
-
-const CardDetails = styled.div`
-  margin-bottom: 20px;
-`;
-
-
-const StyledSelect = styled.select`
-  margin-bottom: 20px;
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  width: 100%;
-
-  @media (min-width: 768px) {
-    width: 48%;
-  }
-`;
-
-const StyledButton = styled.button`
-  padding: 10px;
-  border: none;
-  border-radius: 5px;
-  background-color: #4caf50;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-  &:hover {
-    background-color: #45a049;
-  }
-`;
 
 const Checkout = () => {
     const { orderInfos, setOrderInfos } = useContext(CartContext);
@@ -169,15 +97,15 @@ const Checkout = () => {
         <CardDetails>
         <FormRow>
             <FormGroup>
-                <StyledLabel htmlFor="cardNumber">Card Number</StyledLabel>
+                <StyledLabel htmlFor="cardNumber">Numero de carte</StyledLabel>
                 <StyledInput type="text" id="cardNumber" />
             </FormGroup>
             <FormGroup>
-                <StyledLabel htmlFor="expirationDate">Expiration Date</StyledLabel>
+                <StyledLabel htmlFor="expirationDate">Date d'expiration</StyledLabel>
                 <StyledInput type="text" id="expirationDate" />
             </FormGroup>
             <FormGroup>
-                <StyledLabel htmlFor="securityCode">Security Code</StyledLabel>
+                <StyledLabel htmlFor="securityCode">Code de sécurité</StyledLabel>
                 <StyledInput type="text" id="securityCode" />
             </FormGroup>
         </FormRow>
@@ -188,10 +116,10 @@ const Checkout = () => {
         <CheckoutContainer>
             <form onSubmit={handleSubmit}>
                 <FormSection>
-                <FormTitle>Contact Information</FormTitle>
+                <FormTitle>Information de contact</FormTitle>
                 <FormRow>
                     <FormGroup>
-                    <StyledLabel htmlFor="name">Name</StyledLabel>
+                    <StyledLabel htmlFor="name">Nom</StyledLabel>
                     <StyledInput
                         type="text"
                         id="name"
@@ -211,46 +139,66 @@ const Checkout = () => {
                 </FormRow>
                 </FormSection>
                 <FormSection>
-                <FormTitle>Shipping Address</FormTitle>
+                <FormTitle>Adresse de livraison</FormTitle>
                 {addressFields('shippingAddress')}
                 </FormSection>
                 <FormSection>
-                <FormTitle>Billing Address</FormTitle>
-                <FormRow>
-                    <FormGroup>
-                    <StyledLabel htmlFor="billingAddressOption">Billing Address</StyledLabel>
-                    <StyledSelect
-                        id="billingAddressOption"
-                        value={billingAddressOption}
-                        onChange={(e) => setBillingAddressOption(e.target.value)}
-                    >
-                        <option value="same">Same as shipping address</option>
-                        <option value="different">Use a different billing address</option>
-                    </StyledSelect>
-                    </FormGroup>
-                </FormRow>
+                <FormTitle>Adresse de Facturation</FormTitle>
+                <StyledRadioWrapper>
+                  <StyledRadioLabel>
+                    <StyledRadioInput
+                      type="radio"
+                      name="billingAddressOption"
+                      value="same"
+                      checked={billingAddressOption === 'same'}
+                      onChange={(e) => setBillingAddressOption(e.target.value)}
+                    />
+                    Même que l'adresse de livraison
+                  </StyledRadioLabel>
+                  <StyledRadioLabel>
+                    <StyledRadioInput
+                      type="radio"
+                      name="billingAddressOption"
+                      value="different"
+                      checked={billingAddressOption === 'different'}
+                      onChange={(e) => setBillingAddressOption(e.target.value)}
+                    />
+                    Utiliser une adresse différente
+                  </StyledRadioLabel>
+                </StyledRadioWrapper>
                 {billingAddressOption === 'different' && addressFields('billingAddress')}
-                </FormSection>
-                <FormSection>
-                <FormTitle>Payment Method</FormTitle>
-                <FormRow>
-                    <FormGroup>
-                    <StyledLabel htmlFor="paymentMethod">Payment Method</StyledLabel>
-                    <StyledSelect
-                        id="paymentMethod"
-                        value={paymentMethod}
-                        onChange={(e) => setPaymentMethod(e.target.value)}
-                    >
-                        <option value="card">Credit Card</option>
-                        <option value="paypal">PayPal</option>
-                    </StyledSelect>
-                    </FormGroup>
-                </FormRow>
+                <FormSeparator />
+              </FormSection>
+              <FormSection>
+                <FormTitle>Methode de paiement </FormTitle>
+                <StyledRadioWrapper>
+                  <StyledRadioLabel>
+                    <StyledRadioInput
+                      type="radio"
+                      name="paymentMethod"
+                      value="card"
+                      checked={paymentMethod === 'card'}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    />
+                    Carte de crédit
+                  </StyledRadioLabel>
+                  <StyledRadioLabel>
+                    <StyledRadioInput
+                      type="radio"
+                      name="paymentMethod"
+                      value="paypal"
+                      checked={paymentMethod === 'paypal'}
+                      onChange={(e) => setPaymentMethod(e.target.value)}
+                    />
+                    PayPal
+                  </StyledRadioLabel>
+                </StyledRadioWrapper>
                 {paymentMethod === 'card' && cardDetails()}
-                </FormSection>
-                <FormSection>
-                <StyledButton type="submit">Place Order</StyledButton>
-                </FormSection>
+                <FormSeparator />
+              </FormSection>
+              <FormSection style={{border: 'unset'}}>
+                <StyledButton type="submit">Finaliser la commande</StyledButton>
+              </FormSection>
             </form>
             </CheckoutContainer>
     );
