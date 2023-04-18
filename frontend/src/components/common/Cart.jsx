@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { CartContext } from "../utils/context";
+import { SkeletonImage, SkeletonQuantity, SkeletonText } from "../styles/Layouts";
 
 function Cart() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -8,6 +9,7 @@ function Cart() {
     const [subtotal, setSubtotal] = useState(0);
     const { orderInfos, setOrderInfos } = useContext(CartContext);
     const [products, setProducts] = useState([]);
+    const [isLoading, setIsloading] = useState(true);
 
     if (orderInfos.orderItems) {
         orderInfos.orderItems.forEach((item) => {
@@ -31,40 +33,40 @@ function Cart() {
 
     useEffect(() => {
         if (productIds.length > 0) {
-        const fetchProducts = async () => {
-            const requests = productIds.map((id) =>
-            fetch(`http://localhost:3000/api/catalog/${id}`).then((res) => res.json())
-            );
-            const products = await Promise.all(requests);
-            setProducts(products);
-        };
-        fetchProducts();
+            setIsloading(true);
+            const fetchProducts = async () => {
+                const requests = productIds.map((id) =>
+                fetch(`http://localhost:3000/api/catalog/${id}`).then((res) => res.json())
+                );
+                const products = await Promise.all(requests);
+                setProducts(products);
+                setIsloading(false);
+            };
+            fetchProducts();
+        } else {
+            setIsloading(false);
         }
-    }, [productIds]);
-
+        
+        /* By using JSON.stringify(productIds) as the dependency, 
+        the useEffect will only be triggered when the content of the productIds 
+        array changes, not when a new array is created */
+       // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [JSON.stringify(productIds)]);
     
-    useEffect(() => {
-        document.querySelector('.bi-bag-plus').addEventListener('click', function(e) {
-            document.querySelector('.cart .background').style.display = 'block';
-            document.querySelector('.cart-content').classList.add('show');
-        });
-        
-        document.querySelector('.cart-content__header .bi-x').addEventListener('click', function(e) {
-            document.querySelector('.cart-content').classList.remove('show');
-            document.querySelector('.cart .background').style.display = 'none';
-        });
-        
-        document.querySelector('.cart .background').addEventListener('click', function(e) {
-            document.querySelector('.cart-content').classList.remove('show');
-            document.querySelector('.cart .background').style.display = 'none';
-        });
-        
-        document.querySelector('.cart .payment-button').addEventListener('click', function(e) {
-            document.querySelector('.cart-content').classList.remove('show');
-            document.querySelector('.cart .background').style.display = 'none';
-        });
-    }, []);
-
+    const handleCartContentCloseClick = () => {
+        document.querySelector('.cart-content').classList.remove('show');
+        document.querySelector('.cart .background').style.display = 'none';
+    };
+    
+    const handleCartBackgroundClick = () => {
+        document.querySelector('.cart-content').classList.remove('show');
+        document.querySelector('.cart .background').style.display = 'none';
+    };
+    
+    const handlePaymentButtonClick = () => {
+        document.querySelector('.cart-content').classList.remove('show');
+        document.querySelector('.cart .background').style.display = 'none';
+    };    
 
 
     const downQuantity = (index) => {
@@ -127,64 +129,98 @@ function Cart() {
         });
     };
     
+    const productList = isLoading ? (
+        <div className="cart-content-product">
+            <div className="cart-content-product__part1">
+                <SkeletonImage />
+            </div>
+            <div className="cart-content-product__part2">
+                <div className="cart-content-product__part2-title">
+                    <SkeletonText style={{width: '60%'}} />
+                    <SkeletonText style={{width: '5%'}}/>
+                </div>
+                <div className="cart-content-product__part2-option">
+                    <SkeletonText style={{width: '20%'}}/>
+                </div>
+                <div className="cart-content-product__part2-quantity">
+                    <div className="quantity">
+                        <SkeletonQuantity>
+                            <div />
+                            <div />
+                            <div />
+                        </SkeletonQuantity>
+                    </div>
+                    <SkeletonText style={{width: '10%'}}/>
+                </div>
+            </div>
+        </div>
+    ) : (
+        products.map((item, index) => {
+            const itemIndex = orderInfos.orderItems.findIndex(
+                (product) => product.productId === item._id && product.option === (orderInfos.orderItems[index]?.option || '')
+            );
+            // Do not render the item if it doesn't exist in orderInfos.orderItems
+            if (itemIndex === -1) {
+                return null;
+            }
+            // Check if the option matches
+            const optionMatches = orderInfos.orderItems[itemIndex].option === orderInfos.orderItems[index].option;
+            if (!optionMatches) {
+                return null;
+            }
+            // Calculate the total price for each product in the cart
+            const totalPrice = item.price * orderInfos.orderItems[itemIndex].quantity;
+
+            return(
+                <div className="cart-content-product" key={index}>
+                    <div className="cart-content-product__part1">
+                        <img src={item.images[0]} alt="" />
+                    </div>
+                    <div className="cart-content-product__part2">
+                        <div className="cart-content-product__part2-title">
+                            <span>{item.name}</span>
+                            <span className="bi bi-x" onClick={() => removeItem(itemIndex, orderInfos.orderItems[index].option)}></span>
+                        </div>
+                        <div className="cart-content-product__part2-option">
+                            <span>{orderInfos.orderItems[itemIndex].option}</span>
+                        </div>
+                        <div className="cart-content-product__part2-quantity">
+                            <div className="quantity">
+                                <button className="quantity__button-down" onClick={() => downQuantity(itemIndex)}>-</button>
+                                <input type="number" id="quantity" value={orderInfos.orderItems[itemIndex].quantity} onChange={(e) => setQuantity(itemIndex, Number(e.target.value))} />
+                                <button className="quantity__button-up" onClick={() => upQuantity(itemIndex)}>+</button>
+                            </div>
+                            <div className="price">{totalPrice}€</div>
+                        </div>
+                    </div>
+                </div>
+            )
+        })
+    );
+
     return (
         <div className="cart">
-            <div className="background"></div>
+            <div className="background" onClick={handleCartBackgroundClick}></div>
             <div className="cart-content">
                 <div className="cart-content__header">
                     <span>Panier</span>
-                    <span className="bi bi-x"></span>
+                    <span className="bi bi-x" onClick={handleCartContentCloseClick}></span>
                 </div>
-                <div>
-                    {products && products.map((item, index) => {
-                        const itemIndex = orderInfos.orderItems.findIndex(
-                            (product) => product.productId === item._id && product.option === (orderInfos.orderItems[index]?.option || '')
-                        );
-                        // Do not render the item if it doesn't exist in orderInfos.orderItems
-                        if (itemIndex === -1) {
-                            return null;
-                        }
-                        // Check if the option matches
-                        const optionMatches = orderInfos.orderItems[itemIndex].option === orderInfos.orderItems[index].option;
-                        if (!optionMatches) {
-                            return null;
-                        }
-                         // Calculate the total price for each product in the cart
-                        const totalPrice = item.price * orderInfos.orderItems[itemIndex].quantity;
-
-                        return(
-                            <div className="cart-content-product" key={index}>
-                                <div className="cart-content-product__part1">
-                                    <img src={item.images[0]} alt="" />
-                                </div>
-                                <div className="cart-content-product__part2">
-                                    <div className="cart-content-product__part2-title">
-                                        <span>{item.name}</span>
-                                        <span className="bi bi-x" onClick={() => removeItem(itemIndex, orderInfos.orderItems[index].option)}></span>
-                                    </div>
-                                    <div className="cart-content-product__part2-option">
-                                        <span>{orderInfos.orderItems[itemIndex].option}</span>
-                                    </div>
-                                    <div className="cart-content-product__part2-quantity">
-                                        <div className="quantity">
-                                            <button className="quantity__button-down" onClick={() => downQuantity(itemIndex)}>-</button>
-                                            <input type="number" id="quantity" value={orderInfos.orderItems[itemIndex].quantity} onChange={(e) => setQuantity(itemIndex, Number(e.target.value))} />
-                                            <button className="quantity__button-up" onClick={() => upQuantity(itemIndex)}>+</button>
-                                        </div>
-                                        <div className="price">{totalPrice}€</div>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
-                </div>
-                <div className="cart-content-subtotal">
-                    <span>Sous-total</span>
-                    <span className="price">{subtotal}€</span>
-                </div>
-                <div className="cart-content-payment">
-                    <Link to='/checkout' className="payment-button"><span className="bi bi-credit-card"></span>Paiement sécurisé</Link>
-                </div>
+                {productList}
+                {productIds.length > 0 && (
+                    <>
+                        <div className="cart-content-subtotal">
+                            <span>Sous-total</span>
+                            {isLoading ? 
+                                <SkeletonText style={{width: '10%'}}/> : 
+                                <span className="price">{subtotal}€</span>
+                            }
+                        </div>
+                        <div className="cart-content-payment">
+                            <Link to='/checkout' className="payment-button" onClick={handlePaymentButtonClick}><span className="bi bi-credit-card"></span>Paiement sécurisé</Link>
+                        </div>
+                    </>
+                )}
             </div>
         </div>
     );

@@ -109,9 +109,9 @@ function Product() {
                                 <h2>{data.name}</h2>
                                 <span>{data.price}€</span>
                             </div>
-                            { data.options && data.options.map(option => {
+                            { data.options && data.options.map((option, index) => {
                                 return(
-                                    <div className="option">
+                                    <div className="option" key={index}>
                                         <p>
                                             {option.name} 
                                             {showOptionWarning && (
@@ -139,7 +139,7 @@ function Product() {
                                 )
                             }) }
                             <div className="quantity">
-                                <label  for="quantity">Quantité</label>
+                                <label  htmlFor="quantity">Quantité</label>
                                 <button className="quantity__button-down" onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}>-</button>
                                 <input type="number" id="quantity" value={quantity} onChange={(e) => setQuantity(Number(e.target.value))} />
                                 <button className="quantity__button-up" onClick={() => setQuantity(quantity + 1)}>+</button>
@@ -161,18 +161,16 @@ function Product() {
                         </SkeletonProductBody>
                     </div>
                 ) : (
-                    <>
-                        <div className="product-body">
-                            {data.description}
-                        </div>
-                        <div className="product-catalog-view">
-                            <div className="solid"></div>
-                            <h3>Découvrir d'autres services</h3>
-                            <CatalogView />
-                        </div>
-                    </>
+                    <div className="product-body">
+                        {data.description}
+                    </div>
                 )
             }
+            <div className="product-catalog-view">
+                <div className="solid"></div>
+                <h3>Découvrir d'autres services</h3>
+                <CatalogView />
+            </div>
         </ProductContainer>
     );
 }

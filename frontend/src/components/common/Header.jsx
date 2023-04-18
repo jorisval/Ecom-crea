@@ -7,6 +7,12 @@ import { useContext } from "react";
 
 function Header() {
   const { activePage } = useContext(HeaderContext);
+
+  const handleBagPlusClick = () => {
+    document.querySelector('.cart .background').style.display = 'block';
+    document.querySelector('.cart-content').classList.add('show');
+};
+
   return (
     <div className={activePage === "home" ? "header home" : "header"}>
       <MenuMd />
@@ -15,7 +21,7 @@ function Header() {
       </div>
       <NavLg />
       <div className="header__cart">
-          <span className="bi bi-bag-plus"></span>
+          <span className="bi bi-bag-plus" onClick={handleBagPlusClick}></span>
       </div>
       <Cart />
     </div>

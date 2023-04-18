@@ -1,4 +1,4 @@
-import { createGlobalStyle, keyframes } from 'styled-components';
+import styled, { createGlobalStyle, keyframes, css } from 'styled-components';
 import theme from '../utils/Variables';
 
 const fadeIn = keyframes`
@@ -220,7 +220,7 @@ const LayoutsStyle = createGlobalStyle`
                 display: flex;
                 justify-content: space-between;
                 padding-bottom: 0.375rem;
-                border-bottom: 1px ${theme.colors.colorC4} solid;
+                border-bottom: 1px ${theme.colors.c4} solid;
                 font-size: 0.875rem;
 
                 @media (min-width: ${theme.breakpoints.up.large}) {
@@ -233,7 +233,7 @@ const LayoutsStyle = createGlobalStyle`
                 display: flex;
                 margin-top: 0.9375rem;
                 padding-bottom: 0.75rem;
-                border-bottom: 1px ${theme.colors.colorC4} solid;
+                border-bottom: 1px ${theme.colors.c4} solid;
                 width: 100%;
 
                 @media (min-width: ${theme.breakpoints.up.large}) {
@@ -241,14 +241,14 @@ const LayoutsStyle = createGlobalStyle`
                 }
 
                 &__part1 {
-                width: 30%;
-                margin-right: 0.625rem;
+                    width: 30%;
+                    margin-right: 0.625rem;
 
-                img {
-                    width: 100%;
-                    max-width: 6.25rem;
-                    border-radius: 0.5rem;
-                }
+                    img {
+                        width: 100%;
+                        max-width: 6.25rem;
+                        border-radius: 0.5rem;
+                    }
                 }
 
                 &__part2 {
@@ -259,13 +259,13 @@ const LayoutsStyle = createGlobalStyle`
                     justify-content: space-between;
 
                     &-title {
-                    display: flex;
-                    justify-content: space-between;
-                    margin-bottom: 0.5rem;
+                        display: flex;
+                        justify-content: space-between;
+                        margin-bottom: 0.5rem;
                     }
 
                     &-option {
-                    margin-bottom: 0.5rem;
+                        margin-bottom: 0.5rem;
                     }
 
                     &-quantity {
@@ -279,7 +279,7 @@ const LayoutsStyle = createGlobalStyle`
                         font-size: 0.875rem;
                         color: ${theme.colors.paragraph};
                         padding: 0.25rem 0.5rem;
-                        border: 1px ${theme.colors.colorC4} solid;
+                        border: 1px ${theme.colors.c4} solid;
                         background-color: ${theme.colors.white};
                         cursor: pointer;
                         }
@@ -291,7 +291,7 @@ const LayoutsStyle = createGlobalStyle`
                         padding-bottom: 0.25rem;
                         text-align: center;
                         width: 30px;
-                        border: 1px ${theme.colors.colorC4} solid;
+                        border: 1px ${theme.colors.c4} solid;
                         margin: 0 -6px;
 
                         &::-webkit-inner-spin-button {
@@ -465,5 +465,77 @@ const LayoutsStyle = createGlobalStyle`
 function StyledLayouts() {
     return <LayoutsStyle />
 }
+
+const shimmer = keyframes`
+    0% {
+        background-position: -40rem 0;
+    }
+    100% {
+        background-position: 40rem 0;
+    }
+`;
+
+const skeletonBackground = css`
+    background-image: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 40rem 100%;
+    animation: ${shimmer} 2s infinite;
+`;
+
+export const SkeletonImage = styled.div`
+    width: 100px;
+    height: 100px;
+    border-radius: 0.625rem;
+    ${skeletonBackground}
+`;
+
+export const SkeletonText = styled.div`
+    height: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 3px;
+    ${skeletonBackground}
+`;
+
+export const SkeletonButton = styled.div`
+    width: 100%;
+    height: 2rem;
+    margin-bottom: 0.5rem;
+    border-radius: 3px;
+    ${skeletonBackground}
+`;
+
+export const SkeletonOption = styled.div`
+    width: 100%;
+    height: 1rem;
+    margin-left: 0.625rem;
+    margin-bottom: 0.375rem;
+    border-radius: 3px;
+    ${skeletonBackground}
+`;
+
+export const SkeletonQuantity = styled.div`
+    display: flex;
+    align-items: center;
+
+    & > div {
+        height: 1.5rem;
+        border-radius: 3px;
+        ${skeletonBackground}
+
+        &:first-child {
+            width: 2.5rem;
+            margin-right: 0.625rem;
+        }
+
+        &:nth-child(2) {
+            width: 1rem;
+            margin-right: 0.625rem;
+        }
+
+        &:last-child {
+            width: 2.5rem;
+        }
+    }
+`;
+
   
 export default StyledLayouts;
