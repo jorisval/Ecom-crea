@@ -18,7 +18,7 @@ import { CartContext } from '../utils/context/index';
 import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
-    const { orderInfos, setOrderInfos } = useContext(CartContext);
+    const { orderInfos, setOrderInfos, setOrderPlaced } = useContext(CartContext);
     const [paymentMethod, setPaymentMethod] = useState('card');
     const [billingAddressOption, setBillingAddressOption] = useState('same');
     const navigate = useNavigate();
@@ -42,67 +42,62 @@ const Checkout = () => {
     };
 
     async function handleSubmit(e) {
-        e.preventDefault();
-        // Process the form data and make API calls as needed
-        if(billingAddressOption === 'same') {
-          setOrderInfos({
-            ...orderInfos,
-            billingAddress: { ...orderInfos.shippingAddress },
-          });
-        }
-
-        //Is better to create a function to handle payment values
-        
-        /*orderStatus:
-        'Pending': The order has been placed but not yet processed.
-        'Processing': The order is being processed (e.g., items are being prepared for shipment).
-        'Shipped': The order has been shipped to the customer.
-        'Delivered': The order has been delivered to the customer.
-        'Cancelled': The order has been cancelled by the customer or the store.
-        
-        paymentStatus:
-        'Pending': Payment has not been completed (e.g., waiting for the customer to complete the payment process).
-        'Paid': The payment has been received.
-        'Refunded': The payment has been refunded to the customer.
-        'Failed': The payment has failed (e.g., due to insufficient funds or an expired card).
-        
-        The paymentAmount field is typically updated after the customer has completed the payment process, 
-        either through a payment gateway API or by processing the payment internally. 
-        This field should be set to the total amount paid by the customer, including taxes and shipping fees. 
-        You can update the paymentAmount field once the payment is successfully processed, 
-        either in the handleSubmit function or in a separate function that handles the payment process.
-        */
-
-        setOrderInfos(prevOrderInfos => {
-          return {
-            ...prevOrderInfos,
-            orderStatus: 'Pending',
-            paymentMethod: paymentMethod,
-            paymentStatus: 'Pending',
-            paymentAmount: prevOrderInfos.totalAmount,
-          }
-        });
-
-        try {
-          const response = await fetch("http://localhost:3000/api/order/", {
-              method: "POST",
-              body: JSON.stringify(orderInfos),
-              headers: {
-              "Content-Type": "application/json",
-              },
-          });
+      e.preventDefault();
     
-          const data = await response.json();
-          console.log("Fetch response : "+data);
-
-          // Reset the form
-          e.target.reset();
-      } catch (error) {
-          console.error("Error:", error);
+      // Create a local copy of the orderInfos object
+      const updatedOrderInfos = { ...orderInfos };
+    
+      if (billingAddressOption === 'same') {
+        updatedOrderInfos.billingAddress = { ...orderInfos.shippingAddress };
       }
 
-        navigate('/thank-you');
+      //Is better to create a function to handle payment values
+        
+      /*orderStatus:
+      'Pending': The order has been placed but not yet processed.
+      'Processing': The order is being processed (e.g., items are being prepared for shipment).
+      'Shipped': The order has been shipped to the customer.
+      'Delivered': The order has been delivered to the customer.
+      'Cancelled': The order has been cancelled by the customer or the store.
+      
+      paymentStatus:
+      'Pending': Payment has not been completed (e.g., waiting for the customer to complete the payment process).
+      'Paid': The payment has been received.
+      'Refunded': The payment has been refunded to the customer.
+      'Failed': The payment has failed (e.g., due to insufficient funds or an expired card).
+      
+      The paymentAmount field is typically updated after the customer has completed the payment process, 
+      either through a payment gateway API or by processing the payment internally. 
+      This field should be set to the total amount paid by the customer, including taxes and shipping fees. 
+      You can update the paymentAmount field once the payment is successfully processed, 
+      either in the handleSubmit function or in a separate function that handles the payment process.
+      */
+    
+      updatedOrderInfos.orderStatus = 'Pending';
+      updatedOrderInfos.paymentMethod = paymentMethod;
+      updatedOrderInfos.paymentStatus = 'Pending';
+      updatedOrderInfos.paymentAmount = orderInfos.totalAmount;
+    
+      try {
+        const response = await fetch('http://localhost:3000/api/order/', {
+          method: "POST",
+          body: JSON.stringify(updatedOrderInfos),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+    
+        const order = await response.json();
+        setOrderPlaced(order);
+    
+        // Reset the form
+        e.target.reset();
+      } catch (error) {
+        console.error("Error:", error);
+      }
+      navigate('/thank-you');
     };
+    
 
     const addressFields = (type) => (
         <FormRow>

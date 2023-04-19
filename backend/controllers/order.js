@@ -97,7 +97,7 @@ exports.createNewOrder = (req, res, next) => {
         paymentAmount,
         orderItems,
     } = req.body;
-
+    
     User.findOne({ email })
     .then(user => {
         if (user) {
@@ -138,21 +138,33 @@ exports.createNewOrder = (req, res, next) => {
                     });
 
                     Promise.all([payment.save(), ...orderItemPromises])
-                        .then(() => {
-                            user.orders.push(order._id);
-                            user.save()
+                        .then((results) => {
+                            const orderItemsIds = results.slice(1).map((result) => result._id);
+                            order.orderItems = orderItemsIds;
+                            order.save()
+                            .then(() => {
+                                user.orders.push(order._id);
+                                user.save()
                                 .then(() => {
-                                    res.status(200).json({ message: 'Order saved!' });
+                                    res.status(200).json(order);
                                 })
                                 .catch(error => {
+                                    console.error("Error during processing in if, user saving:", error);
                                     res.status(400).json({ error });
                                 });
+                            })
+                            .catch(error => {
+                                console.error("Error during processing in if, orderItemsIds saving:", error);
+                                res.status(400).json({ error });
+                            });
                         })
                         .catch(error => {
+                            console.error("Error during processing in if, after Promise.all:", error);
                             res.status(400).json({ error });
                         });
                 })
                 .catch(error => {
+                    console.error("Error during processing in if, order infos saving:", error);
                     res.status(400).json({ error });
                 });
         } else {
@@ -215,21 +227,33 @@ exports.createNewOrder = (req, res, next) => {
                         });
 
                         Promise.all([payment.save(), ...orderItemPromises])
-                            .then(() => {
-                                newUser.orders.push(order._id);
-                                newUser.save()
+                            .then((results) => {
+                                const orderItemsIds = results.slice(1).map((result) => result._id);
+                                order.orderItems = orderItemsIds;
+                                order.save()
+                                .then(() => {
+                                    newUser.orders.push(order._id);
+                                    newUser.save()
                                     .then(() => {
-                                        res.status(200).json({ message: 'Order saved!' });
+                                        res.status(200).json(order);
                                     })
                                     .catch(error => {
+                                        console.error("Error during processing in else, user saving:", error);
                                         res.status(400).json({ error });
                                     });
+                                })
+                                .catch(error => {
+                                    console.error("Error during processing in else, orderItemsIds saving:", error);
+                                    res.status(400).json({ error });
+                                });
                             })
                             .catch(error => {
+                                console.error("Error during processing in else, after Promise.all:", error);
                                 res.status(400).json({ error });
                             });
                     })
                     .catch(error => {
+                        console.error("Error during processing in else, order infos saving:", error);
                         res.status(400).json({ error });
                     });
             })
@@ -346,6 +370,34 @@ exports.updateOrderStatus = (req, res) => {
     order.updatedAt = Date.now();
     order.save()
         .then(() => res.status(200).json({ message: 'Order status updated successfully' }))
+        .catch(error => res.status(400).json({ error }));
+    })
+    .catch(error => res.status(400).json({ error }));
+};
+
+exports.updatePaymentStatus = (req, res) => {
+    const orderId = req.params.orderId;
+    const paymentStatus = req.body.paymentStatus;
+  
+    Order.findById(orderId)
+    .then(order => {
+    if (!order) {
+        return res.status(404).json({ error: 'Order not found' });
+    }
+    order.paymentStatus = paymentStatus;
+    order.updatedAt = Date.now();
+    order.save()
+        .then(() => {
+            Payment.findOne({ orderId })
+            .then(payment => {
+                payment.paymentStatus = paymentStatus;
+                payment.updatedAt = Date.now();
+                payment.save()
+                .then(() => res.status(200).json({ message: 'Payment status updated successfully' }))
+                .catch(error => res.status(400).json({ error }));
+            })
+            .catch(error => res.status(400).json({ error }));
+        })
         .catch(error => res.status(400).json({ error }));
     })
     .catch(error => res.status(400).json({ error }));

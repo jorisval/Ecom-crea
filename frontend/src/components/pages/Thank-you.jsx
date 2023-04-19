@@ -1,7 +1,49 @@
-import React, { useContext } from 'react';
-import styled from 'styled-components';
+import React, { useContext, useEffect } from 'react';
+import styled, {keyframes} from 'styled-components';
 import theme from '../utils/Variables';
 import { CartContext } from '../utils/context';
+
+const bounce = keyframes`
+  0%, 80%, 100% {
+    transform: translateY(0);
+  }
+  40% {
+    transform: translateY(-15px);
+  }
+  60% {
+    transform: translateY(-5px);
+  }
+`;
+
+const LoaderContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  z-index: 999;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 1);
+
+  .bounce {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    background-color: ${theme.colors.button};
+    border-radius: 100%;
+    animation: ${bounce} 1.2s infinite ease-in-out;
+  }
+
+  .bounce1 {
+    animation-delay: -0.32s;
+  }
+
+  .bounce2 {
+    animation-delay: -0.16s;
+  }
+`;
 
 const ThankYouContainer = styled.div`
   display: flex;
@@ -51,6 +93,7 @@ const OrderSummary = styled.div`
 const OrderDetails = styled.div`
   display: flex;
   justify-content: space-between;
+  margin: ${theme.layout.spaceBetween20} ${theme.layout.spaceBetween10};
 `;
 
 const OrderDetail = styled.div`
@@ -58,23 +101,32 @@ const OrderDetail = styled.div`
 `;
 
 const ThankYou = () => {
-  const { orderInfos } = useContext(CartContext);
+  const { orderPlaced, setOrderInfos, getInitialOrderInfos } = useContext(CartContext);
+  useEffect(() => {
+    setOrderInfos(getInitialOrderInfos());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+
+  if(!orderPlaced || !orderPlaced.orderItems || orderPlaced.orderItems.length === 0) {
+    return <LoaderContainer />
+  }
 
   return (
     <ThankYouContainer>
-      <ThankYouTitle>Thank you for your order!</ThankYouTitle>
-      <ThankYouSubtitle>Order Summary</ThankYouSubtitle>
+      <ThankYouTitle>Merci pour votre commande!</ThankYouTitle>
+      <ThankYouSubtitle>Récapitulatif de la commande</ThankYouSubtitle>
       <OrderSummary>
         <OrderDetails>
-          <OrderDetail>Order ID: {/*{order._id}*/}</OrderDetail>
-          <OrderDetail>Date: {/*{new Date(order.createdAt).toLocaleDateString()}*/}</OrderDetail>
+          <OrderDetail>Commande ID: {orderPlaced._id}</OrderDetail>
+          <OrderDetail>Date: {new Date(orderPlaced.createdAt).toLocaleDateString()}</OrderDetail>
         </OrderDetails>
         <OrderDetails>
-          <OrderDetail>Total Items: {orderInfos.orderItems.length}</OrderDetail>
-          <OrderDetail>Total Amount: ${orderInfos.totalAmount}</OrderDetail>
+          <OrderDetail>Produit total: {orderPlaced.orderItems.length}</OrderDetail>
+          <OrderDetail>Montant total: ${orderPlaced.totalAmount}</OrderDetail>
         </OrderDetails>
       </OrderSummary>
-      <p>Your order has been placed and will be shipped to you soon!</p>
+      <p>Votre commande a été enregistrée avec succès et sera expédiée bientôt!</p>
     </ThankYouContainer>
   );
 };

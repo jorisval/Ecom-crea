@@ -19,6 +19,7 @@ import ThankYou from './components/pages/Thank-you';
 import StyledBase from './components/styles/base';
 import StyledLayouts from './components/styles/Layouts';
 import StyledComponents from './components/styles/Components';
+import Error404 from './components/pages/error404';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -43,6 +44,7 @@ root.render(
             <Route path='/contact' element={<Contact />}/>
             <Route path='/blog' element={<Blog />}/>
             <Route path='/article/:articleId' element={<Article />} />
+            <Route path='*' element={<Error404 />} />
           </Routes>
           <Footer />
         </CartProvider>

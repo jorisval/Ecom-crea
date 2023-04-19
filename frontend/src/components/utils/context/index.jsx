@@ -12,30 +12,35 @@ export const HeaderProvider = ({children}) => {
 
 export const CartContext = createContext();
 export const CartProvider = ({children}) => {
-    const [orderInfos, setOrderInfos] = useState({
-        email: '',
-        name: '',
-        totalAmount: 0,
-        orderStatus: '',
-        shippingAddress: {
-            street: '',
-            city: '',
-            state: '',
-            country: '',
-            zipCode: ''
-        },
-        billingAddress: {
-            street: '',
-            city: '',
-            state: '',
-            country: '',
-            zipCode: ''
-        },
-        paymentMethod: '',
-        paymentStatus: '',
-        paymentAmount: 0,
-        orderItems: [],
-    });
+    const [orderPlaced, setOrderPlaced] = useState({});
+    function getInitialOrderInfos() {
+        return {
+            email: '',
+            name: '',
+            totalAmount: 0,
+            orderStatus: '',
+            shippingAddress: {
+                street: '',
+                city: '',
+                state: '',
+                country: '',
+                zipCode: ''
+            },
+            billingAddress: {
+                street: '',
+                city: '',
+                state: '',
+                country: '',
+                zipCode: ''
+            },
+            paymentMethod: '',
+            paymentStatus: '',
+            paymentAmount: 0,
+            orderItems: [],
+        }
+    };
+
+    const [orderInfos, setOrderInfos] = useState(getInitialOrderInfos);
     
     const [orderItem, setOrderItem] = useState({
         productId: '',
@@ -44,7 +49,7 @@ export const CartProvider = ({children}) => {
         quantity: 0
     });
     return (
-        <CartContext.Provider value={{orderInfos, setOrderInfos, orderItem, setOrderItem}}>
+        <CartContext.Provider value={{orderInfos, setOrderInfos, orderItem, setOrderItem, orderPlaced, setOrderPlaced, getInitialOrderInfos}}>
             {children}
         </CartContext.Provider>
     )
