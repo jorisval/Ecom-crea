@@ -16,7 +16,7 @@ import Product from './components/pages/Product';
 import { CartProvider, HeaderProvider } from './components/utils/context';
 import Checkout from './components/pages/Checkout';
 import ThankYou from './components/pages/Thank-you';
-import StyledBase from './components/styles/base';
+import StyledBase from './components/styles/Base';
 import StyledLayouts from './components/styles/Layouts';
 import StyledComponents from './components/styles/Components';
 import Error404 from './components/pages/error404';
