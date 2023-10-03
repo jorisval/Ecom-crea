@@ -1,8 +1,9 @@
 import { PortfolioShopContainer, SkeletonLoader } from "../styles/Portfolio-shop";
 import { useFetch } from "../utils/hooks";
+import { BASE_URL } from '../../config';
 
 function PortfolioBoutique() {
-    const { data, dataIsLoading } = useFetch('http://localhost:3000/api/portfolio-shop');
+    const { data, dataIsLoading } = useFetch(`${BASE_URL}/api/portfolio-shop`);
 
     return(
         <PortfolioShopContainer className="portfolio__boutique-contents">

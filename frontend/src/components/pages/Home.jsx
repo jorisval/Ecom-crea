@@ -12,6 +12,7 @@ import IconSatisfaction from "../../assets/images/icone-satisfaction.png";
 import { useFetch } from "../utils/hooks";
 import { Link } from "react-router-dom";
 import { HomeContainer } from "../styles/Home";
+import { BASE_URL } from '../../config';
 
 
 function Home() {
@@ -19,7 +20,7 @@ function Home() {
     useEffect(() => {
         setActivePage('home');
     }, [setActivePage]);
-    const { data } = useFetch('http://localhost:3000/api/client-result');
+    const { data } = useFetch(`${BASE_URL}/api/client-result`);
     
     return(
         <HomeContainer className="home">

@@ -3,13 +3,14 @@ import { Link } from "react-router-dom";
 import { HeaderContext } from "../utils/context";
 import { useFetch } from "../utils/hooks";
 import { CatalogContainer, SkeletonLoader } from "../styles/Catalog";
+import { BASE_URL } from '../../config';
 
 function Catalog() {
     const { setActivePage } = useContext(HeaderContext);
     useEffect(() => {
         setActivePage("catalog");
     }, [setActivePage]);
-    const { data, dataIsLoading } = useFetch('http://localhost:3000/api/catalog');
+    const { data, dataIsLoading } = useFetch(`${BASE_URL}/api/catalog`);
     const[showCount, setShowCount] = useState(8);
     const handleClick = () => {
         setShowCount(showCount + 8);

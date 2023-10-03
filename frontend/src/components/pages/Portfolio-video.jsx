@@ -1,8 +1,9 @@
 import { PortfolioVideoContainer, SkeletonLoader } from "../styles/Portfolio-video";
 import { useFetch } from "../utils/hooks";
+import { BASE_URL } from '../../config';
 
 function PortfolioVideo() {
-    const { data, dataIsLoading } = useFetch('http://localhost:3000/api/portfolio-video');
+    const { data, dataIsLoading } = useFetch(`${BASE_URL}/api/portfolio-video`);
 
     return(
         <PortfolioVideoContainer className="portfolio__video-contents">
