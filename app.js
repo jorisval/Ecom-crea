@@ -19,7 +19,11 @@ const allowedDomains = [
     'http://localhost:3001',
     'http://localhost:3001/',
     'https://ecom-crea.vercel.app/',
-    'https://ecom-crea.vercel.app'
+    'https://ecom-crea.vercel.app',
+    'https://ecom-crea-a9d80dee6a75.herokuapp.com/',
+    'https://ecom-crea-a9d80dee6a75.herokuapp.com',
+    'http://ecom-crea-a9d80dee6a75.herokuapp.com/',
+    'http://ecom-crea-a9d80dee6a75.herokuapp.com'
 ];
   
 
